@@ -65,3 +65,28 @@ Route::post('/edittopic/{id}', [App\Http\Controllers\TopicsController::class, 'e
 Route::get('/edittopic/{id}', [App\Http\Controllers\TopicsController::class, 'edittopic'])->name('edittopic.get');
 Route::get('/alltopics', [App\Http\Controllers\TopicsController::class, 'showalltopics'])->name('alltopics');
 Route::delete('/deletetopic/{id}', [App\Http\Controllers\TopicsController::class, 'deletetopic'])->name('deletetopic');
+
+Route::group(['middleware' => 'admin'], function () {
+    // Admin routes
+});
+
+Route::group(['middleware' => 'sales'], function () {
+    // Sales routes
+});
+
+Route::group(['middleware' => 'dispatch'], function () {
+    // Dispatch routes
+});
+
+Route::get('admin/dashboard', function () {
+    return view('admin/dashboard');
+})->name('admin/dashboard');
+
+Route::get('sales/dashboard', function () {
+    return view('sales/dashboard');
+})->name('sales/dashboard');
+
+Route::get('dispatch/dashboard', function () {
+    return view('dispatch/dashboard');
+})->name('dispatch/dashboard');
+
