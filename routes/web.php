@@ -90,3 +90,15 @@ Route::get('dispatch/dashboard', function () {
     return view('dispatch/dashboard');
 })->name('dispatch/dashboard');
 
+// Route::get('sales/createcarrier', function () {
+//     return view('sales/createcarrier');
+// })->name('sales/createcarrier');
+
+//Sales Routes
+Route::get('/createcarrier', [App\Http\Controllers\SalesController::class, 'create'])->name('createcarrier');
+Route::post('/storecarrier', [App\Http\Controllers\SalesController::class, 'store'])->name('storecarrier');
+Route::get('/showcarrier', [App\Http\Controllers\SalesController::class, 'showcarrier'])->name('showcarrier');
+// Route::post('/editcarrier/{id}', [App\Http\Controllers\SalesController::class, 'editcarrier'])->name('editcarrier');
+Route::get('/editcarrier/{id}', [App\Http\Controllers\SalesController::class, 'editcarrier'])->name('editcarrier');
+Route::put('/updateCarrier/{id}', [App\Http\Controllers\SalesController::class, 'updateCarrier'])->name('updateCarrier');
+Route::delete('/deleteCarrier/{id}', [App\Http\Controllers\SalesController::class, 'deleteCarrier'])->name('deleteCarrier');

@@ -40,19 +40,19 @@ class LoginController extends Controller
     }
 
     protected function redirectTo()
-{
-    switch (auth()->user()->user_type) {
-        case 'admin':
-            return '/admin/dashboard';
-            break;
-        case 'sales':
-            return '/sales/dashboard';
-            break;
-        case 'dispatch':
-            return '/dispatch/dashboard';
-            break;
-        default:
-            return '/dashboard';
+    {
+        switch (auth()->user()->user_type) {
+            case 'admin':
+                return '/admin/dashboard';
+                break;
+            case 'sales':
+                return '/sales/dashboard';
+                break;
+            case 'dispatch':
+                return '/dispatch/dashboard';
+                break;
+            default:
+                return '/dashboard';
+        }
     }
-}
 }

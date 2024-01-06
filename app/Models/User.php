@@ -50,4 +50,8 @@ class User extends Authenticatable
     public function definetopic(){
         return $this->hasMany(Topics::class)->orderBy('created_at', 'DESC');
     }
+
+    public function definecarrier(){
+        return $this->hasMany(Carrier::class)->orderBy('created_at', 'DESC');
+    }
 }
