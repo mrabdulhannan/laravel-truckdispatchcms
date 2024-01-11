@@ -102,3 +102,7 @@ Route::get('/showcarrier', [App\Http\Controllers\SalesController::class, 'showca
 Route::get('/editcarrier/{id}', [App\Http\Controllers\SalesController::class, 'editcarrier'])->name('editcarrier');
 Route::put('/updateCarrier/{id}', [App\Http\Controllers\SalesController::class, 'updateCarrier'])->name('updateCarrier');
 Route::delete('/deleteCarrier/{id}', [App\Http\Controllers\SalesController::class, 'deleteCarrier'])->name('deleteCarrier');
+
+//Time Tracker
+Route::get('/timetracker', [App\Http\Controllers\TimeTrackerController::class, 'timetracker'])->name('timetracker');
+Route::post('/savetimetracking', [App\Http\Controllers\TimeTrackerController::class, 'SaveTimesTracking'])->name('savetimetracking');
