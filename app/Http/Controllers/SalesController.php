@@ -144,13 +144,50 @@ public function updateCarrier(Request $request, $carrierId)
     return redirect()->back()->with('success', 'Carrier updated successfully');
 }
 
-public function deleteCarrier($id)
+    public function deleteCarrier($id)
     {
         // Find the category by ID and delete it
         $carrier = Carrier::findOrFail($id);
         $carrier->delete();
 
         return redirect()->route('showcarrier')->with('success', 'Carrier deleted successfully');
+    }
+
+    public function createdailyupdate(){
+        return view('sales.dailyupdate');
+    }
+
+
+    public function salesdailyupdate(Request $request){
+        // dd($request->all());
+        $date = $request['date'];
+        $sales = $request['sales'];
+        $leads = $request['leads'];
+        $sign_up = $request['sign_up'];
+        $updates = $request['updates'];
+
+        $entry = auth()->user()->salesdailyupdate()->where('date', $date)->firstOrNew();
+        $user = auth()->user();
+        if (!$entry->exists) {
+            $user->salesdailyupdate()->create([
+                "date" => $date,
+                "updates" => $updates,
+                "sales" => $sales,
+                "no_truck_drivers" => $sign_up,
+                "leads" => $leads,
+            ]);
+        }
+        else{
+            $user->salesdailyupdate()->update([
+                "date" => $date,
+                "updates" => $updates,
+                "sales" => $sales,
+                "no_truck_drivers" => $sign_up,
+                "leads" => $leads,
+            ]);
+        }
+        return redirect()->route('createdailyupdate')->with('success', 'Time Updated successfully');
+        
     }
 
 }

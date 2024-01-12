@@ -73,6 +73,7 @@
                     <ul class="dropdown-menu" aria-labelledby="assessmentsLink">
                         <li><a class="dropdown-item" href="{{ route('timetracker') }}">Enter Time</a></li>
                         <li><a class="dropdown-item" href="{{ route('showhistory') }}">Show History</a></li>
+                        <li><a class="dropdown-item" href="{{ route('createdailyupdate') }}">Enter Update</a></li>
                     </ul>
                 </li>
                 {{-- <li class="nav-item">

@@ -67,4 +67,13 @@ class User extends Authenticatable
             ->where('created_at', '>=', $thirtyDaysAgo)
             ->orderBy('created_at', 'DESC');
     }
+
+    public function salesdailyupdate()
+    {
+        $thirtyDaysAgo = now()->subDays(30);
+
+        return $this->hasMany(SalesDailyUpdate::class)
+            ->where('created_at', '>=', $thirtyDaysAgo)
+            ->orderBy('created_at', 'DESC');
+    }
 }
