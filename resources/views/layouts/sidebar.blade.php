@@ -5,7 +5,7 @@
 
 @if($userType == "sales")
     <!-- Sidebar wrapper start -->
-<nav class="sidebar-wrapper">
+<nav class="sidebar-wrapper"  style="display: none">
     <!-- Sidebar brand starts -->
     <div class="sidebar-brand">
         <a href="{{ route('home') }}" class="logo">
@@ -74,7 +74,7 @@
 @else
 
 <!-- Sidebar wrapper start -->
-<nav class="sidebar-wrapper">
+<nav class="sidebar-wrapper" style="display: none">
     <!-- Sidebar brand starts -->
     <div class="sidebar-brand">
         <a href="{{ route('home') }}" class="logo">

@@ -11,7 +11,7 @@ class TimeTracker extends Model
 
     protected $guarded = [];
 
-    protected $dates = ['start_date', 'end_date'];
+    protected $dates = ['date'];
 
     public function user()
     {

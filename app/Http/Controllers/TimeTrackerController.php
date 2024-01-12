@@ -21,7 +21,7 @@ class TimeTrackerController extends Controller
     }
 
     public function SaveTimesTracking(Request $request){
-        dd($request->all());
+        // dd($request->all());
         $date = $request['date'];
         $punchInTime = $request['punchInTime'];
         $breakInTime = $request['breakInTime'];
@@ -30,26 +30,35 @@ class TimeTrackerController extends Controller
         $loginTime = $request['loginTime'];
         $logoutTime = $request['logoutTime'];
 
-
+        $entry = auth()->user()->definetimetracking()->where('date', $date)->firstOrNew();
         $user = auth()->user();
-        $user->definetimetracking()->create([
-            "date" => $date,
-            "punchInTime" => $punchInTime,
-            "breakInTime" => $breakInTime,
-            "breakOutTime" => $breakOutTime,
-            "punchOutTime" => $punchOutTime,
-            "loginTime" => $loginTime,
-            "logoutTime" =>  $logoutTime,
-        ]);
+        if (!$entry->exists) {
+            $user->definetimetracking()->create([
+                "date" => $date,
+                "punch_in_time" => $punchInTime,
+                "break_in_time" => $breakInTime,
+                "break_out_time" => $breakOutTime,
+                "punch_out_time" => $punchOutTime,
+                "login_time" => $loginTime,
+                "logout_time" =>  $logoutTime,
+            ]);
+        }
+        else{
+            $user->definetimetracking()->update([
+                "punch_in_time" => $punchInTime,
+                "break_in_time" => $breakInTime,
+                "break_out_time" => $breakOutTime,
+                "punch_out_time" => $punchOutTime,
+                "login_time" => $loginTime,
+                "logout_time" =>  $logoutTime,
+            ]);
+        }
+        return redirect()->route('timetracker')->with('success', 'Time Updated successfully');
+        
+    }
 
-        $user->definetimetracking()->update([
-            "date" => $date,
-            "punchInTime" => $punchInTime,
-            "breakInTime" => $breakInTime,
-            "breakOutTime" => $breakOutTime,
-            "punchOutTime" => $punchOutTime,
-            "loginTime" => $loginTime,
-            "logoutTime" =>  $logoutTime,
-        ]);
+    public function showhistory()
+    {
+        return view('sales.showhistory');
     }
 }

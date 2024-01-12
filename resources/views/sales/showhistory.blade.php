@@ -60,23 +60,20 @@
         <div class="col-xxl-12">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="card-title">Enter Time for {{now()->format('Y-m-d')}}</h2>
+                    <h2 class="card-title">Time History for Month {{ now()->format('F') }}</h2>
                 </div>
                 <div class="card-body">
                     <div class="">
-                        {{-- <h2>Enter Time Tracking and Login History</h2> --}}
+                        {{-- @php
+                            $allentries = auth()
+                                ->user()
+                                ->definetimetracking();
+                        @endphp --}}
 
-                        <form id="trackingForm" action="{{ route('savetimetracking') }}" enctype="multipart/form-data"
-                            method="POST">
-                            @csrf
-                            @php
-                                $entry = auth()
-                                    ->user()
-                                    ->definetimetracking()
-                                    ->where('date', now()->format('Y-m-d'))
-                                    ->firstOrNew();
-                            @endphp
-                            <table>
+                        <h2>Time Tracking and Login History</h2>
+
+                        <table>
+                            <thead>
                                 <tr>
                                     <th>Date</th>
                                     <th>Punch-in Time</th>
@@ -85,33 +82,49 @@
                                     <th>Punch-out Time</th>
                                     <th>Login Time</th>
                                     <th>Logout Time</th>
-
                                 </tr>
+                            </thead>
+                            <tbody>
+
+                                <?php
+                                    $allentries = Auth::user()->definetimetracking;
+
+                                    if ($allentries->count() === 1) {
+                                        // If there is only one record, retrieve the first record
+                                        $singleEntry = $allentries->first();
+                                ?>
                                 <tr>
-
-                                    <td><input type="text" id="date" name="date" placeholder="YYYY-MM-DD"
-                                            value="{{ now()->format('Y-m-d') }}"></td>
-                                    <td><input type="time" id="punchInTime" name="punchInTime"
-                                            value="{{ $entry->punch_in_time }}"></td>
-                                    <td><input type="time" id="breakInTime" name="breakInTime"
-                                            value="{{ $entry->break_in_time }}"></td>
-                                    <td><input type="time" id="breakOutTime" name="breakOutTime"
-                                            value="{{ $entry->break_out_time }}"></td>
-                                    <td><input type="time" id="punchOutTime" name="punchOutTime"
-                                            value="{{ $entry->punch_out_time }}"></td>
-                                    <td><input type="time" id="loginTime" name="loginTime"
-                                            value="{{ $entry->login_time }}" readonly></td>
-                                    <td><input type="time" id="logoutTime" name="logoutTime"
-                                            value="{{ $entry->logout_time }}"></td>
+                                    <td>{{ optional($singleEntry->date)->format('Y-m-d') }}</td>
+                                    <td>{{ $singleEntry->punch_in_time }}</td>
+                                    <td>{{ $singleEntry->break_in_time }}</td>
+                                    <td>{{ $singleEntry->break_out_time }}</td>
+                                    <td>{{ $singleEntry->punch_out_time }}</td>
+                                    <td>{{ $singleEntry->login_time }}</td>
+                                    <td>{{ $singleEntry->logout_time }}</td>
                                 </tr>
+                                <?php
+                                } else {
+                                    // If there are multiple records, loop through all records
+                                    foreach ($allentries as $key => $singleEntry) {
+                                ?>
+                                <tr>
+                                    <td>{{ optional($singleEntry->date)->format('Y-m-d') }}</td>
+                                    <td>{{ $singleEntry->punch_in_time }}</td>
+                                    <td>{{ $singleEntry->break_in_time }}</td>
+                                    <td>{{ $singleEntry->break_out_time }}</td>
+                                    <td>{{ $singleEntry->punch_out_time }}</td>
+                                    <td>{{ $singleEntry->login_time }}</td>
+                                    <td>{{ $singleEntry->logout_time }}</td>
+                                </tr>
+                                <?php
+                                }   
+                    }
+                    ?>
 
-                            </table>
 
-                            <div class="mt-3 mb-3 me-3" style="text-align: right">
-                                <input type="submit" class="btn btn-success" value="Submit">
-
-                            </div>
-                        </form>
+                                <!-- Add more rows as needed -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

@@ -105,4 +105,5 @@ Route::delete('/deleteCarrier/{id}', [App\Http\Controllers\SalesController::clas
 
 //Time Tracker
 Route::get('/timetracker', [App\Http\Controllers\TimeTrackerController::class, 'timetracker'])->name('timetracker');
+Route::get('/showhistory', [App\Http\Controllers\TimeTrackerController::class, 'showhistory'])->name('showhistory');
 Route::post('/savetimetracking', [App\Http\Controllers\TimeTrackerController::class, 'SaveTimesTracking'])->name('savetimetracking');

@@ -41,8 +41,26 @@ class LoginController extends Controller
 
     protected function redirectTo()
     {
+        
         switch (auth()->user()->user_type) {
             case 'admin':
+                $user = auth()->user();
+        $currentDate = date('Y-m-d');
+        $currentTime = now(); // This gives you the current date and time as a Carbon instance
+
+        // If you just want the time as a string, you can format it
+        $formattedTime = $currentTime->format('H:i:s');
+
+        $entry = auth()->user()->definetimetracking()->where('date', $currentDate)->firstOrNew();
+        
+        if (!$entry->exists) {
+            // dd($formattedTime);
+            $user->definetimetracking()->create([
+                "date" => $currentDate,
+                "login_time" => $formattedTime,
+            ]);
+
+        }
                 return '/admin/dashboard';
                 break;
             case 'sales':

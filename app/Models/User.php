@@ -55,7 +55,16 @@ class User extends Authenticatable
         return $this->hasMany(Carrier::class)->orderBy('created_at', 'DESC');
     }
 
-    public function definetimetracking(){
-        return $this->hasMany(Timetracker::class)->orderBy('created_at', 'DESC');
+    // public function definetimetracking(){
+    //     return $this->hasMany(Timetracker::class)->orderBy('created_at', 'DESC');
+    // }
+
+    public function definetimetracking()
+    {
+        $thirtyDaysAgo = now()->subDays(30);
+
+        return $this->hasMany(Timetracker::class)
+            ->where('created_at', '>=', $thirtyDaysAgo)
+            ->orderBy('created_at', 'DESC');
     }
 }
