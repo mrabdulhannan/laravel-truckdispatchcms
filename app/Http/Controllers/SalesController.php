@@ -32,6 +32,7 @@ class SalesController extends Controller
     // ]);
 
     $user = auth()->user();
+    $currentDate = date('Y-m-d');
 
     // Create a new carrier record for the authenticated user
     $user->definecarrier()->create([
@@ -52,6 +53,7 @@ class SalesController extends Controller
         'PaymentMethod' => $request['PaymentMethod'],
         'Route' => $request['Route'],
         'preferredStates' => $request['preferredStates'],
+        'date'=>$currentDate,
         // Map other form fields accordingly
     ]);
 
@@ -101,6 +103,7 @@ public function updateCarrier(Request $request, $carrierId)
 
     // Find the carrier by ID
     $carrier = Carrier::findOrFail($carrierId);
+    
 
     // Update the carrier attributes if the corresponding input exists in the request
     $carrier->companyName = $request->input('companyName');
@@ -188,6 +191,19 @@ public function updateCarrier(Request $request, $carrierId)
         }
         return redirect()->route('createdailyupdate')->with('success', 'Time Updated successfully');
         
+    }
+
+    public function FilterCarrierHistory(Request $request){
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        $filteredCarriers = auth()
+        ->user()
+        ->definecarrier()
+        ->whereBetween('date', [$start_date, $end_date])
+        ->get();
+    
+        return view('sales.showcarrier', compact('filteredCarriers'));
     }
 
 }

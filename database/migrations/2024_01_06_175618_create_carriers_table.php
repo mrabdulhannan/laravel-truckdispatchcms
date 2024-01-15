@@ -20,6 +20,7 @@ return new class extends Migration
 
         // Make all columns nullable
         $table->string('companyName')->nullable();
+        $table->date('date')->nullable();
         $table->string('dba')->nullable();
         $table->string('address')->nullable();
         $table->string('streetAddress')->nullable();
