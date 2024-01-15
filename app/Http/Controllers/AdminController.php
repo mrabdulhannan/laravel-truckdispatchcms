@@ -50,5 +50,11 @@ class AdminController extends Controller
         return view('admin.updatesforallsales', compact('filteredEntries'));
     }
 
+    public function GetMonthlyHours(Request $request){
+        $timeEntries = $user->definetimetracking()
+        ->whereMonth('date', $month)
+        ->get();
+    }
+
 
 }
