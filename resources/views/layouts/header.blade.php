@@ -84,7 +84,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="assessmentsLink">
                         <li><a class="dropdown-item" href="{{ route('showallusertimehistory') }}">Show All User's Time History</a></li>
-                        <li><a class="dropdown-item" href="{{ route('showhistory') }}">Show History</a></li>
+                        <li><a class="dropdown-item" href="{{ route('updatesforallsales') }}">Show All Sale's Users Updates</a></li>
                         <li><a class="dropdown-item" href="{{ route('createdailyupdate') }}">Enter Update</a></li>
                     </ul>
                 </li>
