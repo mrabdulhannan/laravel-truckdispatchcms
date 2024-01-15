@@ -60,8 +60,21 @@
         <div class="col-xxl-12">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="card-title">Time History for Month {{ now()->format('F') }}</h2>
+                    <h2 class="card-title">Time History</h2>
+                    <form method="get" action="{{ route('filter-time-history') }}">
+                        @csrf
+                        <label for="start_date">Start Date:</label>
+                        <input type="date" id="start_date" name="start_date" required>
+
+                        <label for="end_date">End Date:</label>
+                        <input type="date" id="end_date" name="end_date" required>
+
+                        <button type="submit">Filter</button>
+                    </form>
                 </div>
+                {{-- <div class="card-header">
+                    <h2 class="card-title">Time History for Month {{ now()->format('F') }}</h2>
+                </div> --}}
                 <div class="card-body">
                     <div class="">
                         {{-- @php
@@ -69,6 +82,9 @@
                                 ->user()
                                 ->definetimetracking();
                         @endphp --}}
+                        @php
+                            $filteredEntries = isset($filteredEntries) ? $filteredEntries : auth()->user()->definetimetracking;
+                        @endphp
 
                         <h2>Time Tracking and Login History</h2>
 
@@ -87,11 +103,17 @@
                             <tbody>
 
                                 <?php
-                                    $allentries = Auth::user()->definetimetracking;
+                                // if($filteredEntries->count >=1){
+                                //     $allentries = $filteredEntries;
+                                // }
+                                // else{
+                                //     $allentries = Auth::user()->definetimetracking;
+                                // }
+                                    
 
-                                    if ($allentries->count() === 1) {
+                                    if ($filteredEntries->count() === 1) {
                                         // If there is only one record, retrieve the first record
-                                        $singleEntry = $allentries->first();
+                                        $singleEntry = $filteredEntries->first();
                                 ?>
                                 <tr>
                                     <td>{{ optional($singleEntry->date)->format('Y-m-d') }}</td>
@@ -105,7 +127,7 @@
                                 <?php
                                 } else {
                                     // If there are multiple records, loop through all records
-                                    foreach ($allentries as $key => $singleEntry) {
+                                    foreach ($filteredEntries as $key => $singleEntry) {
                                 ?>
                                 <tr>
                                     <td>{{ optional($singleEntry->date)->format('Y-m-d') }}</td>

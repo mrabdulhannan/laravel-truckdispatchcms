@@ -61,4 +61,17 @@ class TimeTrackerController extends Controller
     {
         return view('sales.showhistory');
     }
+
+    public function FilterTimeHistory(Request $request){
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        $filteredEntries = auth()
+            ->user()
+            ->definetimetracking()
+            ->whereBetween('date', [$start_date, $end_date])
+            ->get();
+
+        return view('sales.showhistory', compact('filteredEntries'));
+    }
 }

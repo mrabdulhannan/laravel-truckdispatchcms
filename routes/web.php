@@ -107,6 +107,8 @@ Route::delete('/deleteCarrier/{id}', [App\Http\Controllers\SalesController::clas
 Route::get('/timetracker', [App\Http\Controllers\TimeTrackerController::class, 'timetracker'])->name('timetracker');
 Route::get('/showhistory', [App\Http\Controllers\TimeTrackerController::class, 'showhistory'])->name('showhistory');
 Route::post('/savetimetracking', [App\Http\Controllers\TimeTrackerController::class, 'SaveTimesTracking'])->name('savetimetracking');
+Route::get('/filter-time-history',[App\Http\Controllers\TimeTrackerController::class, 'FilterTimeHistory'])->name('filter-time-history');
+
 
 //Update
 Route::get('/createdailyupdate', [App\Http\Controllers\SalesController::class, 'createdailyupdate'])->name('createdailyupdate');
