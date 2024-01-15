@@ -76,19 +76,20 @@
                         <li><a class="dropdown-item" href="{{ route('createdailyupdate') }}">Enter Update</a></li>
                     </ul>
                 </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link" href="{{ route('rubrics') }}" id="rubricsLink">Rubrics</a>
-                </li> --}}
+
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="" id="rubricsLink"
+                    <a class="nav-link dropdown-toggle" href="{{ route('timetracker') }}" id="assessmentsLink"
                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Rubrics
+                        Admin Controls
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="assessmentsLink">
-                        <li><a class="dropdown-item" href="">Define Rubrics</a></li>
-                        <li><a class="dropdown-item" href="">Tutorial Presentation</a></li>
+                        <li><a class="dropdown-item" href="{{ route('showallusertimehistory') }}">Show All User's Time History</a></li>
+                        <li><a class="dropdown-item" href="{{ route('showhistory') }}">Show History</a></li>
+                        <li><a class="dropdown-item" href="{{ route('createdailyupdate') }}">Enter Update</a></li>
                     </ul>
                 </li>
+                
+                
             </ul>
             <div class="header-actions-container">
                 <!-- Header actions start -->

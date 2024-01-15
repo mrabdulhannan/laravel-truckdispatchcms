@@ -76,4 +76,11 @@ class User extends Authenticatable
             ->where('created_at', '>=', $thirtyDaysAgo)
             ->orderBy('created_at', 'DESC');
     }
+
+    public function timehistoryforalluser()
+    {
+        return $this->hasMany(Timetracker::class)
+            ->whereDate('created_at', now()->toDateString())
+            ->orderBy('created_at', 'DESC');
+    }
 }

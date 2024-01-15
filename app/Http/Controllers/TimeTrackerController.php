@@ -74,4 +74,13 @@ class TimeTrackerController extends Controller
 
         return view('sales.showhistory', compact('filteredEntries'));
     }
+
+    public function TimeHistoryForAllUsers(Request $request){
+        $selected_date = $request->input('selected_date');
+    
+        $filteredEntries = definetimetracking::whereDate('date', $selected_date)
+            ->get();
+    
+        return view('sales.showhistory', compact('filteredEntries'));
+    }
 }

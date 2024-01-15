@@ -86,8 +86,6 @@
                             $filteredEntries = isset($filteredEntries) ? $filteredEntries : auth()->user()->definetimetracking;
                         @endphp
 
-                        <h2>Time Tracking and Login History</h2>
-
                         <table>
                             <thead>
                                 <tr>

@@ -112,6 +112,11 @@ Route::post('/savetimetracking', [App\Http\Controllers\TimeTrackerController::cl
 Route::get('/filter-time-history',[App\Http\Controllers\TimeTrackerController::class, 'FilterTimeHistory'])->name('filter-time-history');
 
 
-//Update
+//Sales related Routes
 Route::get('/createdailyupdate', [App\Http\Controllers\SalesController::class, 'createdailyupdate'])->name('createdailyupdate');
 Route::post('/salesdailyupdate', [App\Http\Controllers\SalesController::class, 'salesdailyupdate'])->name('salesdailyupdate');
+
+
+//Admin Related Routes
+Route::get('/showallusertimehistory', [App\Http\Controllers\AdminController::class, 'showallusertimehistory'])->name('showallusertimehistory');
+Route::get('/filter-all-user-time-history',[App\Http\Controllers\AdminController::class, 'TimeHistoryForAllUsers'])->name('filter-all-user-time-history');
