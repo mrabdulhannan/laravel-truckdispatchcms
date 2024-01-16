@@ -122,3 +122,4 @@ Route::get('/showallusertimehistory', [App\Http\Controllers\AdminController::cla
 Route::get('/filter-all-user-time-history',[App\Http\Controllers\AdminController::class, 'TimeHistoryForAllUsers'])->name('filter-all-user-time-history');
 Route::get('/updatesforallsales', [App\Http\Controllers\AdminController::class, 'UpdateHistoryForAllSalesUsers'])->name('updatesforallsales');
 Route::get('/filterupdateforallsales',[App\Http\Controllers\AdminController::class, 'FilterUpdateHistoryForSalesUsers'])->name('filterupdateforallsales');
+Route::get('/monthlytimehistory', [App\Http\Controllers\AdminController::class, 'GetMonthlyHours'])->name('monthlytimehistory');
