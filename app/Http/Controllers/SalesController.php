@@ -17,48 +17,41 @@ class SalesController extends Controller
         $this->middleware('sales');
     }
 
-    public function create(){
+    public function create()
+    {
         return view('sales.createcarrier');
     }
 
     public function store(Request $request)
-{
-    // Validate the request data if needed
-    // $data = $request->validate([
-    //     'companyName' => 'required',
-    //     'address' => 'required',
-    //     'email' => 'required|email',
-    //     // Add more validation rules as needed
-    // ]);
+    {
+        $user = auth()->user();
+        $currentDate = date('Y-m-d');
 
-    $user = auth()->user();
-    $currentDate = date('Y-m-d');
+        // Create a new carrier record for the authenticated user
+        $user->definecarrier()->create([
+            'companyName' => $request['companyName'],
+            'dba' => $request['dba'],
+            'address' => $request['address'],
+            'streetAddress' => $request['streetAddress'],
+            'city' => $request['city'],
+            'state' => $request['state'],
+            'email' => $request['email'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'mcNumber' => $request['mcNumber'],
+            'usdot' => $request['usdot'],
+            'numTrucks' => $request['numTrucks'],
+            'numDrivers' => $request['numDrivers'],
+            'equipmentType' => $request['equipmentType'],
+            'PaymentMethod' => $request['PaymentMethod'],
+            'Route' => $request['Route'],
+            'preferredStates' => $request['preferredStates'],
+            
+            // Map other form fields accordingly
+        ]);
 
-    // Create a new carrier record for the authenticated user
-    $user->definecarrier()->create([
-        'companyName' => $request['companyName'],
-        'dba' => $request['dba'],
-        'address' => $request['address'],
-        'streetAddress' => $request['streetAddress'],
-        'city' => $request['city'],
-        'state' => $request['state'],
-        'email' => $request['email'],
-        'phone' => $request['phone'],
-        'dob' => $request['dob'],
-        'mcNumber' => $request['mcNumber'],
-        'usdot' => $request['usdot'],
-        'numTrucks' => $request['numTrucks'],
-        'numDrivers' => $request['numDrivers'],
-        'equipmentType' => $request['equipmentType'],
-        'PaymentMethod' => $request['PaymentMethod'],
-        'Route' => $request['Route'],
-        'preferredStates' => $request['preferredStates'],
-        'date'=>$currentDate,
-        // Map other form fields accordingly
-    ]);
-
-    return redirect('/createcarrier');
-}
+        return redirect('/createcarrier');
+    }
 
     public function showcarrier()
     {
@@ -67,85 +60,85 @@ class SalesController extends Controller
 
     public function editcarrier($id)
     {
-    $carrier = Carrier::findOrFail($id);
+        $carrier = Carrier::findOrFail($id);
 
-    return view('sales/editcarrier', ['carrier' => $carrier]);
+        return view('sales/editcarrier', ['carrier' => $carrier]);
     }
 
 
-public function updateCarrier(Request $request, $carrierId)
-{
-    // Validate the incoming request data as needed
-    $request->validate([
-        'companyName' => 'required|string',
-        'dba' => 'nullable|string',
-        'address' => 'required|string',
-        'streetAddress' => 'required|string',
-        'city' => 'required|string',
-        'state' => 'required|string',
-        'email' => 'required|email',
-        'phone' => 'required|string',
-        'dob' => 'required|date_format:Y-m-d',
-        'mcNumber' => 'required|string',
-        'usdot' => 'required|string',
-        'numTrucks' => 'required|integer',
-        'numDrivers' => 'required|integer',
-        'equipmentType' => 'required|string',
-        'PaymentMethod' => 'required|string',
-        'Route' => 'required|string',
-        'preferredStates' => 'nullable|string',
-        // Add more validation rules as needed for file uploads
-        'mcAuthorityLetter' => 'nullable|mimes:pdf,doc,docx',
-        'certificateOfLiability' => 'nullable|mimes:pdf,doc,docx',
-        'w9Form' => 'nullable|mimes:pdf,doc,docx',
-        'voidCheque' => 'nullable|mimes:pdf,doc,docx',
-    ]);
+    public function updateCarrier(Request $request, $carrierId)
+    {
+        // Validate the incoming request data as needed
+        $request->validate([
+            'companyName' => 'required|string',
+            'dba' => 'nullable|string',
+                        'address' => 'required|string',
+            'streetAddress' => 'required|string',
+            'city' => 'required|string',
+            'state' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'required|string',
+            'dob' => 'required|date_format:Y-m-d',
+            'mcNumber' => 'required|string',
+            'usdot' => 'required|string',
+            'numTrucks' => 'required|integer',
+            'numDrivers' => 'required|integer',
+            'equipmentType' => 'required|string',
+            'PaymentMethod' => 'required|string',
+            'Route' => 'required|string',
+            'preferredStates' => 'nullable|string',
+            // Add more validation rules as needed for file uploads
+            'mcAuthorityLetter' => 'nullable|mimes:pdf,doc,docx',
+            'certificateOfLiability' => 'nullable|mimes:pdf,doc,docx',
+            'w9Form' => 'nullable|mimes:pdf,doc,docx',
+            'voidCheque' => 'nullable|mimes:pdf,doc,docx',
+        ]);
 
-    // Find the carrier by ID
-    $carrier = Carrier::findOrFail($carrierId);
-    
+        // Find the carrier by ID
+        $carrier = Carrier::findOrFail($carrierId);
 
-    // Update the carrier attributes if the corresponding input exists in the request
-    $carrier->companyName = $request->input('companyName');
-    $carrier->dba = $request->input('dba');
-    $carrier->address = $request->input('address');
-    $carrier->streetAddress = $request->input('streetAddress');
-    $carrier->city = $request->input('city');
-    $carrier->state = $request->input('state');
-    $carrier->email = $request->input('email');
-    $carrier->phone = $request->input('phone');
-    $carrier->dob = $request->input('dob');
-    $carrier->mcNumber = $request->input('mcNumber');
-    $carrier->usdot = $request->input('usdot');
-    $carrier->numTrucks = $request->input('numTrucks');
-    $carrier->numDrivers = $request->input('numDrivers');
-    $carrier->equipmentType = $request->input('equipmentType');
-    $carrier->PaymentMethod = $request->input('PaymentMethod');
-    $carrier->Route = $request->input('Route');
-    $carrier->preferredStates = $request->input('preferredStates');
 
-    // Update or handle file uploads
-    if ($request->hasFile('mcAuthorityLetter')) {
-        $carrier->mcAuthorityLetter = $request->file('mcAuthorityLetter')->store('uploads');
+        // Update the carrier attributes if the corresponding input exists in the request
+        $carrier->companyName = $request->input('companyName');
+                $carrier->dba = $request->input('dba');
+        $carrier->address = $request->input('address');
+        $carrier->streetAddress = $request->input('streetAddress');
+        $carrier->city = $request->input('city');
+        $carrier->state = $request->input('state');
+        $carrier->email = $request->input('email');
+        $carrier->phone = $request->input('phone');
+        $carrier->dob = $request->input('dob');
+        $carrier->mcNumber = $request->input('mcNumber');
+        $carrier->usdot = $request->input('usdot');
+        $carrier->numTrucks = $request->input('numTrucks');
+        $carrier->numDrivers = $request->input('numDrivers');
+        $carrier->equipmentType = $request->input('equipmentType');
+        $carrier->PaymentMethod = $request->input('PaymentMethod');
+        $carrier->Route = $request->input('Route');
+        $carrier->preferredStates = $request->input('preferredStates');
+
+        // Update or handle file uploads
+        if ($request->hasFile('mcAuthorityLetter')) {
+            $carrier->mcAuthorityLetter = $request->file('mcAuthorityLetter')->store('uploads');
+        }
+
+        if ($request->hasFile('certificateOfLiability')) {
+            $carrier->certificateOfLiability = $request->file('certificateOfLiability')->store('uploads');
+        }
+
+        if ($request->hasFile('w9Form')) {
+            $carrier->w9Form = $request->file('w9Form')->store('uploads');
+        }
+
+        if ($request->hasFile('voidCheque')) {
+            $carrier->voidCheque = $request->file('voidCheque')->store('uploads');
+        }
+
+        $carrier->save();
+
+        // Redirect back or to a specific route after updating
+        return redirect()->back()->with('success', 'Carrier updated successfully');
     }
-
-    if ($request->hasFile('certificateOfLiability')) {
-        $carrier->certificateOfLiability = $request->file('certificateOfLiability')->store('uploads');
-    }
-
-    if ($request->hasFile('w9Form')) {
-        $carrier->w9Form = $request->file('w9Form')->store('uploads');
-    }
-
-    if ($request->hasFile('voidCheque')) {
-        $carrier->voidCheque = $request->file('voidCheque')->store('uploads');
-    }
-
-    $carrier->save();
-
-    // Redirect back or to a specific route after updating
-    return redirect()->back()->with('success', 'Carrier updated successfully');
-}
 
     public function deleteCarrier($id)
     {
@@ -156,12 +149,14 @@ public function updateCarrier(Request $request, $carrierId)
         return redirect()->route('showcarrier')->with('success', 'Carrier deleted successfully');
     }
 
-    public function createdailyupdate(){
+    public function createdailyupdate()
+    {
         return view('sales.dailyupdate');
     }
 
 
-    public function salesdailyupdate(Request $request){
+    public function salesdailyupdate(Request $request)
+    {
         // dd($request->all());
         $date = $request['date'];
         $sales = $request['sales'];
@@ -179,8 +174,7 @@ public function updateCarrier(Request $request, $carrierId)
                 "no_truck_drivers" => $sign_up,
                 "leads" => $leads,
             ]);
-        }
-        else{
+        } else {
             $user->salesdailyupdate()->update([
                 "date" => $date,
                 "updates" => $updates,
@@ -190,20 +184,29 @@ public function updateCarrier(Request $request, $carrierId)
             ]);
         }
         return redirect()->route('createdailyupdate')->with('success', 'Time Updated successfully');
-        
     }
 
-    public function FilterCarrierHistory(Request $request){
+    public function FilterCarrierHistory(Request $request)
+    {
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
 
         $filteredCarriers = auth()
-        ->user()
-        ->definecarrier()
-        ->whereBetween('date', [$start_date, $end_date])
-        ->get();
-    
+            ->user()
+            ->definecarrier()
+            ->whereBetween('created_at', [$start_date, $end_date])
+            ->get();
+
         return view('sales.showcarrier', compact('filteredCarriers'));
     }
 
+    public function updateCarrierAssignedUser(Request $request, $carrierId)
+    {
+        $assignedTo = $request->input('assigned_to');
+        $carrier = Carrier::findOrFail($carrierId);
+        $carrier->assigned_to = $request->input('assigned_to');
+        $carrier->save();
+        return redirect()->back()->with('success', 'Carrier updated successfully');
+
+    }
 }

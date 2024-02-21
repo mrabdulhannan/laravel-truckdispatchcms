@@ -29,7 +29,7 @@
                     <h2 class="card-title">Updates History for All Sales Users</h2>
                 </div>
                 <div class="card-body">
-                    <form class="filter-form" method="get" action="{{ route('filterupdateforallsales') }}">
+                    {{-- <form class="filter-form" method="get" action="{{ route('filterupdateforallsales') }}">
                         @csrf
                         <label for="selected_date">Select Date:</label>
                         <input type="date" id="selected_date" name="selected_date" required>
@@ -37,7 +37,17 @@
 
                         <button type="submit" class="btn btn-success">Filter</button>
                     </form>
-                    
+                     --}}
+                     <form method="get" action="{{ route('filterupdateforallsales') }}">
+                        @csrf
+                        <label for="start_date">Start Date:</label>
+                        <input type="date" id="start_date" name="start_date" required>
+
+                        <label for="end_date">End Date:</label>
+                        <input type="date" id="end_date" name="end_date" required>
+
+                        <button type="submit">Filter</button>
+                    </form>
                     <table>
                         <thead>
                             <tr>

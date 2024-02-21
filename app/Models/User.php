@@ -83,4 +83,8 @@ class User extends Authenticatable
             ->whereDate('created_at', now()->toDateString())
             ->orderBy('created_at', 'DESC');
     }
+
+    public function defineload(){
+        return $this->hasMany(Load::class)->orderBy('created_at', 'DESC');
+    }
 }

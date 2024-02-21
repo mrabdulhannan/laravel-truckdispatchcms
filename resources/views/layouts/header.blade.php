@@ -65,6 +65,19 @@
                         <li><a class="dropdown-item" href="{{route('showcarrier')}}">Show All</a></a></li>
                     </ul>
                 </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="{{ route('createload') }}" id="feedbackLink"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Load Mgmt
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="feedbackLink">
+                        <li><a class="dropdown-item" href="{{route('createload')}}">Create Load</a></li>
+                        <li><a class="dropdown-item" href="{{route('showload')}}">Show All</a></a></li>
+                    </ul>
+                </li>
+
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="{{ route('timetracker') }}" id="assessmentsLink"
                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -85,7 +98,7 @@
                     <ul class="dropdown-menu" aria-labelledby="assessmentsLink">
                         <li><a class="dropdown-item" href="{{ route('showallusertimehistory') }}">Show All User's Time History</a></li>
                         <li><a class="dropdown-item" href="{{ route('updatesforallsales') }}">Show All Sale's Users Updates</a></li>
-                        <li><a class="dropdown-item" href="{{ route('createdailyupdate') }}">Enter Update</a></li>
+                        <li><a class="dropdown-item" href="{{ route('showcarrieradmin') }}">Show All Carriers</a></li>
                     </ul>
                 </li>
                 

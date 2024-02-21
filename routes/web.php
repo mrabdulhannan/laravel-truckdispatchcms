@@ -122,3 +122,13 @@ Route::get('/showallusertimehistory', [App\Http\Controllers\AdminController::cla
 Route::get('/filter-all-user-time-history',[App\Http\Controllers\AdminController::class, 'TimeHistoryForAllUsers'])->name('filter-all-user-time-history');
 Route::get('/updatesforallsales', [App\Http\Controllers\AdminController::class, 'UpdateHistoryForAllSalesUsers'])->name('updatesforallsales');
 Route::get('/filterupdateforallsales',[App\Http\Controllers\AdminController::class, 'FilterUpdateHistoryForSalesUsers'])->name('filterupdateforallsales');
+Route::get('/showcarrieradmin', [App\Http\Controllers\AdminController::class, 'showcarrieradmin'])->name('showcarrieradmin');
+Route::put('/updateCarrierAssignedUser/{id}', [App\Http\Controllers\AdminController::class, 'updateCarrierAssignedUser'])->name('updateCarrierAssignedUser');
+Route::get('/filter-carrier-history-admin',[App\Http\Controllers\AdminController::class, 'FilterCarrierHistoryAdmin'])->name('filter-carrier-history-admin');
+
+//Dispatch Related Routes
+Route::get('/createload', [App\Http\Controllers\DispatchController::class, 'createload'])->name('createload');
+Route::post('/storeload', [App\Http\Controllers\DispatchController::class, 'store'])->name('storeload');
+Route::get('/showload', [App\Http\Controllers\DispatchController::class, 'showload'])->name('showload');
+Route::get('/editload/{id}', [App\Http\Controllers\DispatchController::class, 'editload'])->name('editload');
+Route::delete('/deleteload/{id}', [App\Http\Controllers\DispatchController::class, 'deleteload'])->name('deleteload');
