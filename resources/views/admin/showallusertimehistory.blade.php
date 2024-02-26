@@ -37,11 +37,21 @@
                             ->definetimetracking->first();
                 @endphp
                 <div class="card-body">
-                    <form class="filter-form" method="get" action="{{ route('filter-all-user-time-history') }}">
+                    {{-- <form class="filter-form" method="get" action="{{ route('filter-all-user-time-history') }}">
                         @csrf
                         <label for="selected_date">Select Date:</label>
                         <input type="date" id="selected_date" name="selected_date" required>
 
+
+                        <button type="submit">Filter</button>
+                    </form> --}}
+                    <form method="get" action="{{ route('filter-all-user-time-history') }}">
+                        @csrf
+                        <label for="start_date">Start Date:</label>
+                        <input type="date" id="start_date" name="start_date" required>
+
+                        <label for="end_date">End Date:</label>
+                        <input type="date" id="end_date" name="end_date" required>
 
                         <button type="submit">Filter</button>
                     </form>

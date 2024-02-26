@@ -122,3 +122,25 @@ Route::get('/showallusertimehistory', [App\Http\Controllers\AdminController::cla
 Route::get('/filter-all-user-time-history',[App\Http\Controllers\AdminController::class, 'TimeHistoryForAllUsers'])->name('filter-all-user-time-history');
 Route::get('/updatesforallsales', [App\Http\Controllers\AdminController::class, 'UpdateHistoryForAllSalesUsers'])->name('updatesforallsales');
 Route::get('/filterupdateforallsales',[App\Http\Controllers\AdminController::class, 'FilterUpdateHistoryForSalesUsers'])->name('filterupdateforallsales');
+Route::get('/showcarrieradmin', [App\Http\Controllers\AdminController::class, 'showcarrieradmin'])->name('showcarrieradmin');
+Route::put('/updateCarrierAssignedUser/{id}', [App\Http\Controllers\AdminController::class, 'updateCarrierAssignedUser'])->name('updateCarrierAssignedUser');
+Route::get('/filter-carrier-history-admin',[App\Http\Controllers\AdminController::class, 'FilterCarrierHistoryAdmin'])->name('filter-carrier-history-admin');
+Route::get('/showloadadmin', [App\Http\Controllers\AdminController::class, 'showloadadmin'])->name('showloadadmin');
+Route::get('/filter-load-history-admin',[App\Http\Controllers\AdminController::class, 'FilterLoadHistoryAdmin'])->name('filter-load-history-admin');
+
+
+
+//Dispatch Related Routes
+Route::get('/createload', [App\Http\Controllers\DispatchController::class, 'createload'])->name('createload');
+Route::post('/storeload', [App\Http\Controllers\DispatchController::class, 'store'])->name('storeload');
+Route::get('/showload', [App\Http\Controllers\DispatchController::class, 'showload'])->name('showload');
+Route::get('/editload/{id}', [App\Http\Controllers\DispatchController::class, 'editload'])->name('editload');
+Route::delete('/deleteload/{id}', [App\Http\Controllers\DispatchController::class, 'deleteload'])->name('deleteload');
+Route::get('/showcarrierdispatch', [App\Http\Controllers\DispatchController::class, 'showcarrierdispatch'])->name('showcarrierdispatch');
+Route::get('/filter-carrier-history-dispatch',[App\Http\Controllers\DispatchController::class, 'FilterCarrierHistoryDispatch'])->name('filter-carrier-history-dispatch');
+
+//Resources Routes
+Route::get('/files', [App\Http\Controllers\ResourceController::class, 'index'])->name('file.index');
+Route::get('/showallfiles', [App\Http\Controllers\ResourceController::class, 'showallfiles'])->name('showallfiles');
+Route::post('/files', [App\Http\Controllers\ResourceController::class, 'store'])->name('file.store');
+Route::delete('/files/{id}/{filename}', [App\Http\Controllers\ResourceController::class, 'destroy'])->name('file.destroy');

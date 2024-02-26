@@ -4,7 +4,7 @@
 @endpush
 @section('content')
         @php
-        $filteredCarriers = isset($filteredCarriers) ? $filteredCarriers : Auth::user()->definecarrier;
+        $filteredCarriers = isset($carriers) ? $carriers : carriers;
         @endphp
     <!-- Row start -->
     <div class="row">
@@ -12,7 +12,7 @@
             <div class="card">
                 <div class="card-header">
                     <h2 class="card-title">My Carrier</h2>
-                    <form method="get" action="{{ route('filter-carrier-history') }}" class="flex flex-col space-y-4">
+                    <form method="get" action="{{ route('filter-carrier-history-dispatch') }}" class="flex flex-col space-y-4">
                         @csrf
                         <label for="start_date" class="text-lg font-semibold">Start Date:</label>
                         <input type="date" id="start_date" name="start_date" required
@@ -40,16 +40,34 @@
                                     </div>
                                     <div class="d-flex">
                                         <div>
-                                            <form action="{{ route('editcarrier', ['id' => $carrier->id]) }}" method="get">
+                                            <form action="{{ route('updateCarrierAssignedUser', ['id' => $carrier->id]) }}" method="POST" enctype="multipart/form-data" class="row g-3 align-items-center">
                                                 @csrf
-                                                <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+                                                @method('PUT')
+                                            
+                                                <div>
+                                            
+                                                <!-- Status select -->
+                                                <label for="status" class="col-auto">Status:</label>
+                                                <div class="col-auto">
+                                                    <select name="status" class="form-select" aria-label="Select Status">
+                                                        <option value="" {{ empty($carrier->status) ? 'selected' : '' }}>No status</option>
+                                                        <option value="active" {{ $carrier->status == 'active' ? 'selected' : '' }}>Active</option>
+                                                        <option value="pending" {{ $carrier->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                                        <option value="rejected" {{ $carrier->status == 'rejected' ? 'selected' : '' }}>Rejected</option>
+                                                    </select>
+                                                </div>
+                                                </div>
+                                            
+                                                <!-- Update button -->
+                                                <div class="col-auto">
+                                                    <button type="submit" class="btn btn-success btn-sm me-1">Update</button>
+                                                </div>
                                             </form>
                                         </div>
                                         <div>
-                                            <form action="{{ route('deleteCarrier', ['id' => $carrier->id]) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this carrier?')">
+                                            <form action="{{ route('editcarrier', ['id' => $carrier->id]) }}" method="get">
                                                 @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                <button type="submit" class="btn btn-warning btn-sm ms-2">Edit</button>
                                             </form>
                                         </div>
                                     </div>

@@ -36,7 +36,7 @@
                 </div>
             @endif
                 <h1>
-                    Welcome to eFeedback
+                    Welcome to Staff Management System
                 </h1>
         </div>
     </body>
