@@ -46,7 +46,7 @@ class SalesController extends Controller
             'PaymentMethod' => $request['PaymentMethod'],
             'Route' => $request['Route'],
             'preferredStates' => $request['preferredStates'],
-            
+
             // Map other form fields accordingly
         ]);
 
@@ -72,7 +72,7 @@ class SalesController extends Controller
         $request->validate([
             'companyName' => 'required|string',
             'dba' => 'nullable|string',
-                        'address' => 'required|string',
+            'address' => 'required|string',
             'streetAddress' => 'required|string',
             'city' => 'required|string',
             'state' => 'required|string',
@@ -87,7 +87,6 @@ class SalesController extends Controller
             'PaymentMethod' => 'required|string',
             'Route' => 'required|string',
             'preferredStates' => 'nullable|string',
-            // Add more validation rules as needed for file uploads
             'mcAuthorityLetter' => 'nullable|mimes:pdf,doc,docx',
             'certificateOfLiability' => 'nullable|mimes:pdf,doc,docx',
             'w9Form' => 'nullable|mimes:pdf,doc,docx',
@@ -100,7 +99,7 @@ class SalesController extends Controller
 
         // Update the carrier attributes if the corresponding input exists in the request
         $carrier->companyName = $request->input('companyName');
-                $carrier->dba = $request->input('dba');
+        $carrier->dba = $request->input('dba');
         $carrier->address = $request->input('address');
         $carrier->streetAddress = $request->input('streetAddress');
         $carrier->city = $request->input('city');
@@ -200,13 +199,40 @@ class SalesController extends Controller
         return view('sales.showcarrier', compact('filteredCarriers'));
     }
 
-    public function updateCarrierAssignedUser(Request $request, $carrierId)
-    {
-        $assignedTo = $request->input('assigned_to');
-        $carrier = Carrier::findOrFail($carrierId);
-        $carrier->assigned_to = $request->input('assigned_to');
-        $carrier->save();
-        return redirect()->back()->with('success', 'Carrier updated successfully');
+    // public function FilterCarrierHistory(Request $request)
+    // {
+    //     dd($request->all());
+    //     // Retrieve input values
+    //     $start_date = $request->input('start_date');
+    //     $end_date = $request->input('end_date');
+    //     $assigned_to = $request->input('assigned_to');
+    //     $status = $request->input('status');
+    //     $approved = $request->input('approved');
+    //     $assigned = $request->input('assigned');
 
-    }
+    //     // Start building the query
+    //     $query = auth()->user()->definecarrier();
+
+    //     // Apply filters if they are provided
+    //     if (!empty($start_date) && !empty($end_date)) {
+    //         $query->whereBetween('created_at', [$start_date, $end_date]);
+    //     }
+    //     if (!empty($assigned_to)) {
+    //         $query->where('assigned_to', $assigned_to);
+    //     }
+    //     if (!empty($status)) {
+    //         $query->where('status', $status);
+    //     }
+    //     if (!is_null($approved)) {
+    //         $query->where('approved', $approved);
+    //     }
+    //     if (!is_null($assigned)) {
+    //         $query->where('assigned', $assigned);
+    //     }
+
+    //     // Execute the query
+    //     $filteredCarriers = $query->get();
+
+    //     return view('sales.showcarrier', compact('filteredCarriers'));
+    // }
 }

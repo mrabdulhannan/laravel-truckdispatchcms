@@ -132,3 +132,11 @@ Route::post('/storeload', [App\Http\Controllers\DispatchController::class, 'stor
 Route::get('/showload', [App\Http\Controllers\DispatchController::class, 'showload'])->name('showload');
 Route::get('/editload/{id}', [App\Http\Controllers\DispatchController::class, 'editload'])->name('editload');
 Route::delete('/deleteload/{id}', [App\Http\Controllers\DispatchController::class, 'deleteload'])->name('deleteload');
+Route::get('/showcarrierdispatch', [App\Http\Controllers\DispatchController::class, 'showcarrierdispatch'])->name('showcarrierdispatch');
+Route::get('/filter-carrier-history-dispatch',[App\Http\Controllers\DispatchController::class, 'FilterCarrierHistoryDispatch'])->name('filter-carrier-history-dispatch');
+
+//Resources Routes
+Route::get('/files', [App\Http\Controllers\ResourceController::class, 'index'])->name('file.index');
+Route::get('/showallfiles', [App\Http\Controllers\ResourceController::class, 'showallfiles'])->name('showallfiles');
+Route::post('/files', [App\Http\Controllers\ResourceController::class, 'store'])->name('file.store');
+Route::delete('/files/{id}/{filename}', [App\Http\Controllers\ResourceController::class, 'destroy'])->name('file.destroy');

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Load;
+use App\Models\Carrier;
+use App\Models\User;
 
 class DispatchController extends Controller
 {
@@ -108,5 +110,29 @@ class DispatchController extends Controller
         $load->delete();
 
         return redirect()->route('showload')->with('success', 'Load deleted successfully');
+    }
+
+    public function showcarrierdispatch()
+    {
+        // Assuming you have authenticated user
+        $users = User::all();
+        $user = auth()->user();
+
+        // Fetch carriers assigned to the authenticated user
+        $carriers = Carrier::where('assigned_to', $user->id)->get();
+
+        return view('dispatch/showcarrierdispatch', ['carriers' => $carriers, 'users' => $users]);
+    }
+
+    public function FilterCarrierHistoryDispatch(Request $request)
+    {
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        $carriers = Carrier::where('assigned_to', auth()->user()->id)
+            ->whereBetween('created_at', [$start_date, $end_date])
+            ->get();
+
+        return view('dispatch/showcarrierdispatch', compact('carriers'));
     }
 }
