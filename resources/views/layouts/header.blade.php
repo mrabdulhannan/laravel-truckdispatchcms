@@ -55,7 +55,8 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="feedbackLink">
                                 <li><a class="dropdown-item" href="{{ route('createcarrier') }}">Create Carrier</a></li>
-                                <li><a class="dropdown-item" href="{{ route('showcarrier') }}">Show All</a></a></li>
+                                <li><a class="dropdown-item" href="{{ route('showcarrieradmin') }}">Show All Carriers</a>
+                                </li>
                             </ul>
                         </li>
 
@@ -66,7 +67,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="feedbackLink">
                                 <li><a class="dropdown-item" href="{{ route('createload') }}">Create Load</a></li>
-                                <li><a class="dropdown-item" href="{{ route('showload') }}">Show All</a></a></li>
+                                <li><a class="dropdown-item" href="{{ route('showloadadmin') }}">Show All Loads</a></a></li>
                             </ul>
                         </li>
 
@@ -92,8 +93,7 @@
                                         Time History</a></li>
                                 <li><a class="dropdown-item" href="{{ route('updatesforallsales') }}">Show All Sale's
                                         Users Updates</a></li>
-                                <li><a class="dropdown-item" href="{{ route('showcarrieradmin') }}">Show All Carriers</a>
-                                </li>
+                                
                             </ul>
                         </li>
                         <li class="nav-item dropdown">

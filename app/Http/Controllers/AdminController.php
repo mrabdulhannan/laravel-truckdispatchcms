@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\TimeTracker;
 use App\Models\SalesDailyUpdate;
 use App\Models\Carrier;
+use App\Models\Load;
+
 
 class AdminController extends Controller
 {
@@ -191,5 +193,50 @@ class AdminController extends Controller
         $carrier = $query->get();
 
         return view('admin/showcarrieradmin', compact('carrier', 'users'));
+    }
+
+    public function showloadadmin()
+    {
+        $loads = Load::all();
+        // dd($carrier);
+        $users = User::all();
+
+        $totalAmount = $loads->sum('amount');
+        $totalPaid = $loads->sum('paid');
+        $totalRemainingBalance = $loads->sum('remainingbalance');
+        $totalProfit = $loads->sum('profit');
+
+        return view('admin/showloadadmin', compact('loads', 'users', 'totalAmount', 'totalPaid', 'totalRemainingBalance', 'totalProfit'));
+
+        // return view('admin/showloadadmin', compact('loads', 'users'));
+    }
+
+    public function FilterLoadHistoryAdmin(Request $request)
+    {
+        // dd($request->all());
+        $users = User::all();
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        $added_by = $request->input('added_by');
+        // Start building the query
+        $query = Load::query();
+
+        // Apply filters if they are provided
+        if (!empty($start_date) && !empty($end_date)) {
+            $query->whereBetween('created_at', [$start_date, $end_date]);
+        }
+        if (!empty($added_by)) {
+            $query->where('user_id', $added_by);
+        }
+
+        // Execute the query
+        $loads = $query->get();
+
+        $totalAmount = $loads->sum('amount');
+        $totalPaid = $loads->sum('paid');
+        $totalRemainingBalance = $loads->sum('remainingbalance');
+        $totalProfit = $loads->sum('profit');
+
+        return view('admin/showloadadmin', compact('loads', 'users', 'totalAmount', 'totalPaid', 'totalRemainingBalance', 'totalProfit'));
     }
 }

@@ -125,6 +125,10 @@ Route::get('/filterupdateforallsales',[App\Http\Controllers\AdminController::cla
 Route::get('/showcarrieradmin', [App\Http\Controllers\AdminController::class, 'showcarrieradmin'])->name('showcarrieradmin');
 Route::put('/updateCarrierAssignedUser/{id}', [App\Http\Controllers\AdminController::class, 'updateCarrierAssignedUser'])->name('updateCarrierAssignedUser');
 Route::get('/filter-carrier-history-admin',[App\Http\Controllers\AdminController::class, 'FilterCarrierHistoryAdmin'])->name('filter-carrier-history-admin');
+Route::get('/showloadadmin', [App\Http\Controllers\AdminController::class, 'showloadadmin'])->name('showloadadmin');
+Route::get('/filter-load-history-admin',[App\Http\Controllers\AdminController::class, 'FilterLoadHistoryAdmin'])->name('filter-load-history-admin');
+
+
 
 //Dispatch Related Routes
 Route::get('/createload', [App\Http\Controllers\DispatchController::class, 'createload'])->name('createload');

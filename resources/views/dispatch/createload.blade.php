@@ -92,7 +92,7 @@
                                 <input type="text" class="inputfull" id="trip" name="trip" required>
 
                                 <label class="label" for="amount">$ AMOUNT</label>
-                                <input type="text" class="inputfull" id="amount" name="amount" required>
+                                <input type="number" class="inputfull" id="amount" name="amount" required>
 
                                 <label class="label" for="pudate">PU DATE</label>
                                 <input type="date" class="inputfull" id="pudate" name="pudate" required>
@@ -116,13 +116,13 @@
                                 <input type="text" class="inputfull" id="dispatcher" name="dispatcher" required>
 
                                 <label class="label" for="profit">PROFIT</label>
-                                <input type="text" class="inputfull" id="profit" name="profit" required>
+                                <input type="number" class="inputfull" id="profit" name="profit" required>
 
                                 <label class="label" for="paid">PAID</label>
-                                <input type="text" class="inputfull" id="paid" name="paid" required>
+                                <input type="number" class="inputfull" id="paid" name="paid" required>
 
                                 <label class="label" for="remainingbalance">REMAINING BALANCE</label>
-                                <input type="text" class="inputfull" id="remainingbalance" name="remainingbalance"
+                                <input type="number" class="inputfull" id="remainingbalance" name="remainingbalance"
                                     required>
 
                                 <label class="label" for="invoicestatus">Invoice Status</label>
