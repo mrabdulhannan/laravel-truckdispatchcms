@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('sales_daily_updates', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('user_type')->default('admin');
-            $table->string('password');
-            $table->rememberToken();
+            $table->unsignedBigInteger('user_id');
+            $table->date('date');
+            $table->text('updates')->nullable();
+            $table->integer('sales')->nullable();
+            $table->integer('no_truck_drivers')->nullable();
+            $table->integer('leads')->nullable();
             $table->timestamps();
-            
+            $table->index('user_id');
         });
     }
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('sales_daily_updates');
     }
 };

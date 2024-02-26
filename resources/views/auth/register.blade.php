@@ -42,7 +42,21 @@
                         @enderror
                     </div>
                 </div>
+                
+                <div class="mb-3">
+                    <label for="user_type" class="form-label">{{ __('User Type (admin, sales, dispatch)') }}</label>
 
+                    <div class="">
+                        <input id="user_type" type="text" class="form-control @error('user_type') is-invalid @enderror"
+                            name="user_type" value="{{ old('user_type') }}" required autocomplete="user_type" autofocus>
+
+                        @error('user_type')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">{{ __('Password') }}</label>
 
