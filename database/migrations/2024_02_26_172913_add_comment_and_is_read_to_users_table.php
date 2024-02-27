@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->text('comment')->nullable();
             $table->boolean('is_read')->default(false);
+            $table->decimal('salary_hour', 10, 2)->nullable();
+            $table->decimal('salary', 10, 2)->nullable();
         });
     }
 
@@ -29,6 +31,8 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('comment');
             $table->dropColumn('is_read');
+            $table->dropColumn('salary_hour');
+            $table->dropColumn('salary');
         });
     }
 };
