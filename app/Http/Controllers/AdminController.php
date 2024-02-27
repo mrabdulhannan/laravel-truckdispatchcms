@@ -8,6 +8,7 @@ use App\Models\TimeTracker;
 use App\Models\SalesDailyUpdate;
 use App\Models\Carrier;
 use App\Models\Load;
+use Illuminate\Support\Facades\Hash;
 
 
 class AdminController extends Controller
@@ -269,7 +270,64 @@ class AdminController extends Controller
         return redirect()->route('showallusers')->with('success', 'Load deleted successfully');
     }
 
-    public function updateuseradmin($id){
-        
+    public function updateuseradmin(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        // Validate request data
+        $rules = [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'user_type' => 'required|string|in:admin,sales,dispatch',
+            'salary_hour' => 'required|numeric',
+        ];
+
+        // Add password validation rule if provided
+        if ($request->filled('password')) {
+            $rules['password'] = 'required|string|min:8';
+        }
+
+        $request->validate($rules);
+
+        // Update user details
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->user_type = $request->user_type;
+        $user->salary_hour = $request->salary_hour;
+
+        // Update password if provided
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
+        return redirect()->route('showallusers')->with('success', 'User updated successfully!');
+    }
+
+    public function createuser(){
+        return view('admin/createuser');
+    }
+
+    public function registeruser(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8',
+            'user_type' => 'required|string|in:admin,sales,dispatch',
+            'salary_hour' => 'required|numeric',
+        ]);
+
+        // Create the user
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->user_type = $request->user_type;
+        $user->salary_hour = $request->salary_hour;
+        $user->save();
+
+        return redirect()->route('showallusers')->with('success', 'User created successfully!');
     }
 }

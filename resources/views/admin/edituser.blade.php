@@ -68,22 +68,98 @@
                         <div class="card-body">
                             <h2 class="card-title">Update User</h2>
 
-                            <form action="{{ route('updateCarrier', ['id' => $user->id]) }}" enctype="multipart/form-data" method="POST">
+                            <form method="POST" action="{{ route('updateuseradmin', ['id' => $user->id]) }}">
                                 @csrf
+                                {{-- <div class="login-box">
+                                    <div class="login-form"> --}}
 
-                                <label class="label" for="user-id">User ID</label>
-                                <input type="text" class="inputfull" id="user-id" name="user-id" value="{{$user->id}}" required>
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label">{{ __('ID') }}</label>
+                        
+                                            <div class="">
+                                                <input id="id" type="text" class="form-control @error('name') is-invalid @enderror"
+                                                    name="id" value="{{$user->id}}" readonly autocomplete="name" autofocus>
+                        
+                                            </div>
+                                        </div>
 
-                                <label class="label" for="user-email">User Email</label>
-                                <input type="email" class="inputfull" id="user-email" name="user-email" value="{{$user->email}}" required>
-
-                                <label class="label" for="user-name">User NAME</label>
-                                <input type="text" class="inputfull" id="user-name" name="user-name" value="{{$user->name}}" required>
-
-                                <label class="label" for="user-salary-our">User Per Hour Salary</label>
-                                <input type="number" class="inputfull" id="user-salary-our" name="user-salary-our" value="{{$user->salary_hour}}" required>
-
-                                <input type="submit" value="Update User" class="btn btn-success">
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label">{{ __('Name') }}</label>
+                        
+                                            <div class="">
+                                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                                                    name="name" value="{{$user->name}}" required autocomplete="name" autofocus>
+                        
+                                                @error('name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                        
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">{{ __('Email Address') }}</label>
+                        
+                                            <div class="">
+                                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                                    name="email" value="{{$user->email}}" required autocomplete="email">
+                        
+                                                @error('email')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="user_type" class="form-label">{{ __('User Type (admin, sales, dispatch)') }}</label>
+                        
+                                            <div class="">
+                                                <input id="user_type" type="text" class="form-control @error('user_type') is-invalid @enderror"
+                                                    name="user_type" value="{{$user->user_type}}" required autocomplete="user_type" autofocus>
+                        
+                                                @error('user_type')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+        
+                                        <div class="mb-3">
+                                            <label for="salary_hour" class="form-label">{{ __('Per Hour Salary') }}</label>
+                        
+                                            <div class="">
+                                                <input id="salary_hour" type="number" class="form-control @error('user_type') is-invalid @enderror"
+                                                    name="salary_hour" value="{{$user->salary_hour}}" required autocomplete="user_type" autofocus>
+                                            </div>
+                                        </div>
+        
+                                        <div class="mb-3">
+                                            <label for="password" class="form-label">{{ __('Password') }}</label>
+                        
+                                            <div class="">
+                                                <input id="password" type="password"
+                                                    class="form-control @error('password') is-invalid @enderror" name="password"
+                                                    autocomplete="new-password">
+                        
+                                                @error('password')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                        
+                                        <div class="login-form-actions">
+                                            <button type="submit" class="btn btn-primary"> <span class="icon"> <i
+                                                        class="bi bi-arrow-right-circle"></i> </span>
+                                                Update</button>
+                                        </div>
+                                    {{-- </div>
+                                </div> --}}
                             </form>
 
                         </div>
