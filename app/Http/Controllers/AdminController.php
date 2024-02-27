@@ -239,4 +239,37 @@ class AdminController extends Controller
 
         return view('admin/showloadadmin', compact('loads', 'users', 'totalAmount', 'totalPaid', 'totalRemainingBalance', 'totalProfit'));
     }
+
+    public function showallusers(Request $request)
+    {
+
+        $users = User::all();
+        // $selected_date = $request->input('selected_date', now()->toDateString());
+
+        // $filteredEntries = TimeTracker::whereDate('date', $selected_date)
+        //     ->with('user')
+        //     ->get();
+
+        return view('admin.showallusers', compact('users'));
+    }
+
+    public function edituser($id)
+    {
+        $user = User::findOrFail($id);
+
+        return view('admin/edituser', ['user' => $user]);
+    }
+
+    public function deleteuser($id)
+    {
+        // Find the category by ID and delete it
+        $load = User::findOrFail($id);
+        $load->delete();
+
+        return redirect()->route('showallusers')->with('success', 'Load deleted successfully');
+    }
+
+    public function updateuseradmin($id){
+        
+    }
 }
