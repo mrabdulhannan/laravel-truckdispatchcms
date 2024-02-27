@@ -107,6 +107,17 @@
                             </ul>
                         </li>
 
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="{{ route('createload') }}" id="feedbackLink"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                User Mgmt
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="feedbackLink">
+                                <li><a class="dropdown-item" href="{{ route('createload') }}">Create User</a></li>
+                                <li><a class="dropdown-item" href="{{ route('showallusers') }}">Show All Users</a></a></li>
+                            </ul>
+                        </li>
+
                     </ul>
                     <div class="header-actions-container">
                         <!-- Header actions start -->
