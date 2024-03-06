@@ -134,6 +134,13 @@ Route::post('/updateuseradmin/{id}', [App\Http\Controllers\AdminController::clas
 Route::get('/createuser', [App\Http\Controllers\AdminController::class, 'createuser'])->name('createuser');
 Route::post('/registeruser', [App\Http\Controllers\AdminController::class, 'registeruser'])->name('registeruser');
 
+//Admin Routes for Notes
+Route::get('/createnote', [App\Http\Controllers\AdminController::class, 'createnote'])->name('createnote');
+Route::post('/storenote', [App\Http\Controllers\AdminController::class, 'storenote'])->name('storenote');
+Route::get('/showallnotes', [App\Http\Controllers\AdminController::class, 'showallnotes'])->name('showallnotes');
+Route::delete('/deletenote/{id}', [App\Http\Controllers\AdminController::class, 'deletenote'])->name('deletenote');
+Route::get('/editnote/{id}', [App\Http\Controllers\AdminController::class, 'editnote'])->name('editnote');
+
 
 
 

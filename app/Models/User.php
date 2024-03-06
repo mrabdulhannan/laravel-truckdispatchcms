@@ -91,4 +91,8 @@ class User extends Authenticatable
     public function resources(){
         return $this->hasMany(Resource::class)->orderBy('created_at', 'DESC');
     }
+
+    public function notes(){
+        return $this->hasMany(Notes::class)->orderBy('created_at', 'DESC');
+    }
 }
