@@ -407,4 +407,29 @@ class AdminController extends Controller
 
         return view('admin/editnote', ['note' => $note, 'users'=>$users]);
     }
+
+
+    public function showondashboard(){
+        $user = auth()->user();
+        $assignedNotes = Notes::where('assigned_to', $user->id)->get()??[];
+        return view('dispatch/dashboard',compact('assignedNotes'));
+    }
+
+    public function admindashboard(){
+        $user = auth()->user();
+        $assignedNotes = Notes::where('assigned_to', $user->id)->get()??[];
+        return view('admin/dashboard',compact('assignedNotes'));
+    }
+
+    public function salesdashboard(){
+        $user = auth()->user();
+        $assignedNotes = Notes::where('assigned_to', $user->id)->get()??[];
+        return view('sales/dashboard',compact('assignedNotes'));
+    }
+
+    public function qadashboard(){
+        $user = auth()->user();
+        $assignedNotes = Notes::where('assigned_to', $user->id)->get()??[];
+        return view('home',compact('assignedNotes'));
+    }
 }

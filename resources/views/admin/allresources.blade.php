@@ -58,7 +58,7 @@
                             <div class="form-container">
 
                                 <div class="card">
-                                    @if (Auth::user()->resources->isEmpty())
+                                    @if ($files->isEmpty())
                                         <div class="alert alert-warning">
                                             No files found.
                                         </div>
@@ -74,7 +74,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach (Auth::user()->resources as $file)
+                                                    @foreach ($files as $file)
                                                         <tr>
                                                             <td>
                                                                 <a href="{{ asset('storage/' . $file->file_path) }}"
@@ -85,15 +85,22 @@
                                                             <td>
                                                                 <div class="d-flex">
                                                                     <div>
-                                                                        <form
-                                                                    action="{{ route('file.destroy', ['id' => $file->id, 'filename' => basename($file->file_path)]) }}"
-                                                                    method="post"
-                                                                    onsubmit="return confirm('Are you sure you want to delete this file?')">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit"
-                                                                        class="btn btn-danger btn-sm"><span class="bi bi-trash"></span></button>
-                                                                </form>
+                                                                        {{-- <form
+                                                                        action="{{ route('file.destroy', ['id' => $file->id, 'filename' => basename($file->file_path)]) }}"
+                                                                        method="post"
+                                                                        onsubmit="return confirm('Are you sure you want to delete this file?')">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit"
+                                                                            class="btn btn-danger btn-sm"><span class="bi bi-trash"></span></button>
+                                                                        </form> --}}
+                                                                        <form action="{{ route('file.destroy', ['id' => $file->id, 'filename' => basename($file->file_path)]) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this file?')">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button type="submit" class="btn btn-danger btn-sm" {{ Auth::user()->user_type !== 'admin' ? 'disabled' : '' }}>
+                                                                                <span class="bi bi-trash"></span>
+                                                                            </button>
+                                                                        </form>
                                                                     </div>
                                                                     <div>
                                                                         <span><a href="{{ asset('storage/' . $file->file_path) }}" class="btn btn-success"> View</a></span>

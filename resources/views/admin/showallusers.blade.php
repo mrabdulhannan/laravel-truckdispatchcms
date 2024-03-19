@@ -34,7 +34,7 @@
                                             <div>
                                                 <form action="{{ route('edituser', ['id' => $user->id]) }}" method="get">
                                                     @csrf
-                                                    <button type="submit" class="btn btn-warning btn-sm me-1">Edit</button>
+                                                    <button type="submit" class="btn btn-warning btn-sm me-1" {{ Auth::user()->user_type !== 'admin' ? 'disabled' : '' }}>Edit</button>
                                                 </form>
                                             </div>
                                             <div>
@@ -42,7 +42,7 @@
                                                     onsubmit="return confirm('Are you sure you want to delete this load?')">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm me-1">Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm me-1" {{ Auth::user()->user_type !== 'admin' ? 'disabled' : '' }}>Delete</button>
                                                 </form>
                                             </div>
                                         </div>
