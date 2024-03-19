@@ -89,9 +89,9 @@
                                 Admin Controls
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="assessmentsLink">
-                                <li><a class="dropdown-item" href="{{ route('showallusertimehistory') }}">Show All User's
+                                <li><a class="dropdown-item" href="{{ route('showallusertimehistory') }}">All User's
                                         Time History</a></li>
-                                <li><a class="dropdown-item" href="{{ route('updatesforallsales') }}">Show All Sale's
+                                <li><a class="dropdown-item" href="{{ route('updatesforallsales') }}">All Sales
                                         Users Updates</a></li>
                                 
                             </ul>
