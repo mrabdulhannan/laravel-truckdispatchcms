@@ -113,7 +113,7 @@
                                 User Mgmt
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="feedbackLink">
-                                <li><a class="dropdown-item" href="{{ route('createload') }}">Create User</a></li>
+                                <li><a class="dropdown-item" href="{{ route('createuser') }}">Create User</a></li>
                                 <li><a class="dropdown-item" href="{{ route('showallusers') }}">Show All Users</a></a></li>
                             </ul>
                         </li>

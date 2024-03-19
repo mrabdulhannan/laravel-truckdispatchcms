@@ -1,6 +1,24 @@
 @extends('layouts.app')
 
 @push('stylesheet-page-level')
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 @endpush
 @section('content')
     <!-- Row start -->
@@ -58,7 +76,32 @@
                             
                         </form>
                     </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Date</th>
+                                <th>Total Number of Sales</th>
+                                <th>Total Number of Leads</th>
+                                <th>Total No. of Sign Up (Truck Drivers)</th>
+                                <th>Day's Updates</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Auth::user()->salesdailyupdate as $entry)
+                                <tr>
+                                    <td>{{ $entry->user->name }}</td>
+                                    <td>{{ $entry->date }}</td>
+                                    <td>{{ $entry->sales }}</td>
+                                    <td>{{ $entry->leads }}</td>
+                                    <td>{{ $entry->no_truck_drivers }}</td>
+                                    <td>{{ $entry->updates }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
+                
             </div>
         </div>
     </div>
