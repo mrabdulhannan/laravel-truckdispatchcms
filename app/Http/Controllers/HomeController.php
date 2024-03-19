@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Notes;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = auth()->user();
+        $assignedNotes = Notes::where('assigned_to', $user->id)->get()??[];
+        return view('home',compact('assignedNotes'));
     }
 
     public function definecategories()

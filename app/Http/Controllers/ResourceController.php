@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Resource;
+
+
 
 class ResourceController extends Controller
 {
@@ -21,9 +24,10 @@ class ResourceController extends Controller
 
     public function showallfiles()
     {
-        $user = auth()->user();
-        // $files = Storage::files('uploads'); // Change 'uploads' to your storage path
-        $files = $user->resources();
+        $files = Resource::all();
+        // $user = auth()->user();
+        // // $files = Storage::files('uploads'); // Change 'uploads' to your storage path
+        // $files = $user->resources();
         return view('admin/allresources', compact('files'));
     }
 

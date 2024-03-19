@@ -43,8 +43,8 @@
                     </div>
                 </div>
                 
-                <div class="mb-3">
-                    <label for="user_type" class="form-label">{{ __('User Type (admin, sales, dispatch)') }}</label>
+                {{-- <div class="mb-3">
+                    <label for="user_type" class="form-label">{{ __('User Type (admin, sales, dispatch, qa)') }}</label>
 
                     <div class="">
                         <input id="user_type" type="text" class="form-control @error('user_type') is-invalid @enderror"
@@ -56,7 +56,32 @@
                             </span>
                         @enderror
                     </div>
+                </div> --}}
+
+                <div class="mb-3">
+                    <label for="user_type" class="form-label">{{ __('User Type (admin, sales, dispatch, qa)') }}</label>
+                
+                    <div class="position-relative">
+                        <select id="user_type" class="form-control select-with-arrow @error('user_type') is-invalid @enderror"
+                            name="user_type" required autocomplete="user_type" autofocus>
+                            <option value="admin">Admin</option>
+                            <option value="sales">Sales</option>
+                            <option value="dispatch">Dispatch</option>
+                            <option value="qa">QA</option>
+                        </select>
+                        <i class="bi bi-caret-down arrow-icon"></i>
+                
+                        @error('user_type')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
                 </div>
+                
+                
+
+                
                 <div class="mb-3">
                     <label for="password" class="form-label">{{ __('Password') }}</label>
 
@@ -97,3 +122,27 @@
     </form>
     <!-- Login box end -->
 </div>
+?>
+<style>
+    /* Adjust the position of the arrow icon */
+.position-relative {
+    position: relative;
+}
+
+/* Style for the arrow icon */
+.arrow-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Adjust as needed */
+    transform: translateY(-50%);
+    pointer-events: none; /* Ensure the arrow doesn't interfere with select functionality */
+}
+
+input#password {
+        -webkit-box-shadow: 0 0 0 30px white inset !important;
+    }
+
+    input#email {
+        -webkit-box-shadow: 0 0 0 30px white inset !important;
+    }
+</style>

@@ -41,70 +41,47 @@ class LoginController extends Controller
 
     protected function redirectTo()
     {
-        
+
         switch (auth()->user()->user_type) {
             case 'admin':
-                $user = auth()->user();
-                $currentDate = date('Y-m-d');
-                $currentTime = now(); // This gives you the current date and time as a Carbon instance
-
-                // If you just want the time as a string, you can format it
-                $formattedTime = $currentTime->format('H:i:s');
-
-                $entry = auth()->user()->definetimetracking()->where('date', $currentDate)->firstOrNew();
-                
-                if (!$entry->exists) {
-                    // dd($formattedTime);
-                    $user->definetimetracking()->create([
-                        "date" => $currentDate,
-                        "login_time" => $formattedTime,
-                    ]);
-
-                }
+                $this->addPunchinTime();
                 return '/admin/dashboard';
                 break;
             case 'sales':
-                $user = auth()->user();
-                $currentDate = date('Y-m-d');
-                $currentTime = now(); // This gives you the current date and time as a Carbon instance
-
-                // If you just want the time as a string, you can format it
-                $formattedTime = $currentTime->format('H:i:s');
-
-                $entry = auth()->user()->definetimetracking()->where('date', $currentDate)->firstOrNew();
-                
-                if (!$entry->exists) {
-                    // dd($formattedTime);
-                    $user->definetimetracking()->create([
-                        "date" => $currentDate,
-                        "login_time" => $formattedTime,
-                    ]);
-
-                }
+                $this->addPunchinTime();
                 return '/sales/dashboard';
                 break;
             case 'dispatch':
-                $user = auth()->user();
-                $currentDate = date('Y-m-d');
-                $currentTime = now(); // This gives you the current date and time as a Carbon instance
-
-                // If you just want the time as a string, you can format it
-                $formattedTime = $currentTime->format('H:i:s');
-
-                $entry = auth()->user()->definetimetracking()->where('date', $currentDate)->firstOrNew();
-                
-                if (!$entry->exists) {
-                    // dd($formattedTime);
-                    $user->definetimetracking()->create([
-                        "date" => $currentDate,
-                        "login_time" => $formattedTime,
-                    ]);
-
-                }
+                $this->addPunchinTime();
                 return '/dispatch/dashboard';
                 break;
+            case 'qa':
+                $this->addPunchinTime();
+                return '/qa/dashboard';
+                break;
             default:
-                return '/dashboard';
+                return '/qa/dashboard';
+        }
+    }
+
+    public function addPunchinTime()
+    {
+        $user = auth()->user();
+        $currentDate = date('Y-m-d');
+        $currentTime = now(); // This gives you the current date and time as a Carbon instance
+
+        // If you just want the time as a string, you can format it
+        $formattedTime = $currentTime->format('H:i:s');
+
+        $entry = auth()->user()->definetimetracking()->where('date', $currentDate)->firstOrNew();
+
+        if (!$entry->exists) {
+            // dd($formattedTime);
+            $user->definetimetracking()->create([
+                "date" => $currentDate,
+                "login_time" => $formattedTime,
+                "punch_in_time" => $formattedTime,
+            ]);
         }
     }
 }

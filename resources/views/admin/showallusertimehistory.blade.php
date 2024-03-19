@@ -28,6 +28,45 @@
             <div class="card">
                 <div class="card-header">
                     <h2 class="card-title">Time History for All Users</h2>
+                    <form method="get" action="{{ route('filter-all-user-time-history') }}" class="mt-4">
+                        @csrf
+                        <div class="d-flex flex-wrap align-items-center">
+                            <!-- Start Date input -->
+                            <div class="form-group mb-3 me-3">
+                                <label for="start_date" class="text-lg font-semibold">Start Date:</label>
+                                <input type="date" id="start_date" name="start_date" class="form-control">
+                            </div>
+                        
+                            <!-- Add space here -->
+                        
+                            <!-- End Date input -->
+                            <div class="form-group mb-3 me-3">
+                                <label for="end_date" class="text-lg font-semibold">End Date:</label>
+                                <input type="date" id="end_date" name="end_date" class="form-control">
+                            </div>
+                        
+                            <!-- Add space here -->
+                        
+                            <!-- Assigned To select -->
+                            <div class="form-group mb-3 me-3">
+                                <label for="assigned_to" class="text-lg font-semibold">Assigned To:</label>
+                                <select name="assigned_to" id="assigned_to" class="form-select">
+                                    <option value="">Select User</option> <!-- Empty default option -->
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                     
+                        
+                        
+                            <!-- Add space here -->
+                        
+                            <!-- Filter button -->
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                        </div>
+                        
+                    </form>
                 </div>
                 @php
                     $filteredEntries = isset($filteredEntries)
@@ -55,6 +94,7 @@
 
                         <button type="submit">Filter</button>
                     </form>
+                    
                     <table>
                         <thead>
                             <tr>
@@ -72,6 +112,9 @@
                         </thead>
                         <tbody>
                             @foreach ($filteredEntries as $entry)
+                            @php
+                            $salary_hour = \App\Models\User::find($entry->user_id)->salary_hour;
+                            @endphp
                                 <tr>
                                     <td>{{ $entry->user->name }}</td>
                                     <td>{{ $entry->date }}</td>
@@ -97,7 +140,7 @@
                                         }
 
                                         // Calculate total salary (replace this with your specific logic)
-                                        $totalSalary = $totalHours * 10;
+                                        $totalSalary = $totalHours * $salary_hour;
                                     @endphp
 
                                     <td>{{ number_format($totalHours, 2) }}</td>

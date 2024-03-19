@@ -8,20 +8,24 @@ use App\Models\TimeTracker;
 use App\Models\SalesDailyUpdate;
 use App\Models\Carrier;
 use App\Models\Load;
+use App\Models\Notes;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 
 class AdminController extends Controller
 {
     public function showallusertimehistory(Request $request)
     {
+        $users = User::all();
+        // $filteredEntries = TimeTracker::all();
         $selected_date = $request->input('selected_date', now()->toDateString());
 
         $filteredEntries = TimeTracker::whereDate('date', $selected_date)
             ->with('user')
             ->get();
 
-        return view('admin.showallusertimehistory', compact('filteredEntries'));
+        return view('admin.showallusertimehistory', compact('filteredEntries','users'));
     }
 
     public function TimeHistoryForAllUsers(Request $request)
@@ -33,14 +37,35 @@ class AdminController extends Controller
         //     ->get();
 
         // return view('admin.showallusertimehistory', compact('filteredEntries'));
+        ///Old working Code:
+        // $startDate = $request->input('start_date');
+        // $endDate = $request->input('end_date');
+
+        // $filteredEntries = TimeTracker::whereBetween('date', [$startDate, $endDate])
+        //     ->with('user') // Assuming there is a 'user' relationship in your TimeTracker model
+        //     ->get();
+
+        // return view('admin.showallusertimehistory', compact('filteredEntries'));
+
+        //New Code
+        $users = User::all();
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
-
-        $filteredEntries = TimeTracker::whereBetween('date', [$startDate, $endDate])
-            ->with('user') // Assuming there is a 'user' relationship in your TimeTracker model
-            ->get();
-
-        return view('admin.showallusertimehistory', compact('filteredEntries'));
+        $assignedTo = $request->input('assigned_to');
+    
+        $query = TimeTracker::query();
+    
+        if ($startDate && $endDate) {
+            $query->whereBetween('date', [$startDate, $endDate]);
+        }
+    
+        if ($assignedTo) {
+            $query->where('user_id', $assignedTo);
+        }
+    
+        $filteredEntries = $query->with('user')->get();
+    
+        return view('admin.showallusertimehistory', compact('filteredEntries', 'users'));
     }
 
     public function UpdateHistoryForAllSalesUsers(Request $request)
@@ -329,5 +354,82 @@ class AdminController extends Controller
         $user->save();
 
         return redirect()->route('showallusers')->with('success', 'User created successfully!');
+    }
+
+
+    public function createnote(){
+        $users = User::all();
+        return view('admin/createnote', ['users' => $users]);
+    }
+
+    public function storenote(Request $request)
+    {
+
+        // dd($request->all());
+        $user = Auth::user();
+        // Create the user
+        $note = new Notes();
+        $note->comment = $request->comment;
+        $note->user_id = $user->id;
+        $note->assigned_to = $request->user_id;
+        $note->save();
+
+        return redirect()->route('createnote')->with('success', 'User created successfully!');
+    }
+
+
+    public function showallnotes(Request $request)
+    {
+
+        $notes = Notes::all();
+        // $selected_date = $request->input('selected_date', now()->toDateString());
+
+        // $filteredEntries = TimeTracker::whereDate('date', $selected_date)
+        //     ->with('user')
+        //     ->get();
+
+        return view('admin.showallnotes', compact('notes'));
+    }
+
+    public function deletenote($id)
+    {
+        // Find the category by ID and delete it
+        $note = Notes::findOrFail($id);
+        $note->delete();
+
+        return redirect()->route('showallnotes')->with('success', 'Note deleted successfully');
+    }
+
+    public function editnote($id)
+    {
+        $note = Notes::findOrFail($id);
+        $users = User::all();
+
+        return view('admin/editnote', ['note' => $note, 'users'=>$users]);
+    }
+
+
+    public function showondashboard(){
+        $user = auth()->user();
+        $assignedNotes = Notes::where('assigned_to', $user->id)->get()??[];
+        return view('dispatch/dashboard',compact('assignedNotes'));
+    }
+
+    public function admindashboard(){
+        $user = auth()->user();
+        $assignedNotes = Notes::where('assigned_to', $user->id)->get()??[];
+        return view('admin/dashboard',compact('assignedNotes'));
+    }
+
+    public function salesdashboard(){
+        $user = auth()->user();
+        $assignedNotes = Notes::where('assigned_to', $user->id)->get()??[];
+        return view('sales/dashboard',compact('assignedNotes'));
+    }
+
+    public function qadashboard(){
+        $user = auth()->user();
+        $assignedNotes = Notes::where('assigned_to', $user->id)->get()??[];
+        return view('home',compact('assignedNotes'));
     }
 }
