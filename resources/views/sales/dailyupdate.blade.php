@@ -30,17 +30,17 @@
                     
                                     <div class="form-group">
                                         <label for="sales">Total Number of Sales:</label>
-                                        <input type="number" class="form-control" id="sales" name="sales" value="{{$entry->sales}}">
+                                        <input type="number" class="form-control" id="sales" name="sales" value="{{$entry->sales}}" min="0">
                                     </div>
                     
                                     <div class="form-group">
                                         <label for="leads">Total Number of Leads:</label>
-                                        <input type="number" class="form-control" id="leads" name="leads" value="{{$entry->leads}}">
+                                        <input type="number" class="form-control" id="leads" name="leads" value="{{$entry->leads}}" min="0">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="sign_up">Total No. of Sign Up (Truck Drivers):</label>
-                                        <input type="number" class="form-control" id="sign_up" name="sign_up" value="{{$entry->no_truck_drivers}}">
+                                        <input type="number" class="form-control" id="sign_up" name="sign_up" value="{{$entry->no_truck_drivers}}" min="0">
                                     </div>
                                 </div>
                     
