@@ -78,17 +78,7 @@ Route::group(['middleware' => 'dispatch'], function () {
     // Dispatch routes
 });
 
-Route::get('admin/dashboard', function () {
-    return view('admin/dashboard');
-})->name('admin/dashboard');
 
-Route::get('sales/dashboard', function () {
-    return view('sales/dashboard');
-})->name('sales/dashboard');
-
-Route::get('dispatch/dashboard', function () {
-    return view('dispatch/dashboard');
-})->name('dispatch/dashboard');
 
 // Route::get('sales/createcarrier', function () {
 //     return view('sales/createcarrier');
@@ -134,6 +124,13 @@ Route::post('/updateuseradmin/{id}', [App\Http\Controllers\AdminController::clas
 Route::get('/createuser', [App\Http\Controllers\AdminController::class, 'createuser'])->name('createuser');
 Route::post('/registeruser', [App\Http\Controllers\AdminController::class, 'registeruser'])->name('registeruser');
 
+//Admin Routes for Notes
+Route::get('/createnote', [App\Http\Controllers\AdminController::class, 'createnote'])->name('createnote');
+Route::post('/storenote', [App\Http\Controllers\AdminController::class, 'storenote'])->name('storenote');
+Route::get('/showallnotes', [App\Http\Controllers\AdminController::class, 'showallnotes'])->name('showallnotes');
+Route::delete('/deletenote/{id}', [App\Http\Controllers\AdminController::class, 'deletenote'])->name('deletenote');
+Route::get('/editnote/{id}', [App\Http\Controllers\AdminController::class, 'editnote'])->name('editnote');
+
 
 
 
@@ -151,3 +148,10 @@ Route::get('/files', [App\Http\Controllers\ResourceController::class, 'index'])-
 Route::get('/showallfiles', [App\Http\Controllers\ResourceController::class, 'showallfiles'])->name('showallfiles');
 Route::post('/files', [App\Http\Controllers\ResourceController::class, 'store'])->name('file.store');
 Route::delete('/files/{id}/{filename}', [App\Http\Controllers\ResourceController::class, 'destroy'])->name('file.destroy');
+
+
+//Dashboard Routes
+Route::get('dispatch/dashboard', [App\Http\Controllers\AdminController::class, 'showondashboard'])->name('dispatch/dashboard');
+Route::get('admin/dashboard', [App\Http\Controllers\AdminController::class, 'admindashboard'])->name('admin/dashboard');
+Route::get('sales/dashboard', [App\Http\Controllers\AdminController::class, 'salesdashboard'])->name('sales/dashboard');
+Route::get('qa/dashboard', [App\Http\Controllers\AdminController::class, 'qadashboard'])->name('qa/dashboard');

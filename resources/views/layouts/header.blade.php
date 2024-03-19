@@ -46,7 +46,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('home') }}" id="homeLink">Dashboard</a>
+                            <a class="nav-link" aria-current="page" href="{{ route('admin/dashboard') }}" id="homeLink">Dashboard</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="{{ route('definetopic') }}" id="feedbackLink"
@@ -118,6 +118,17 @@
                             </ul>
                         </li>
 
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="{{ route('createload') }}" id="feedbackLink"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Notes Mgmt
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="feedbackLink">
+                                <li><a class="dropdown-item" href="{{ route('createnote') }}">Create a Note</a></li>
+                                <li><a class="dropdown-item" href="{{ route('showallnotes') }}">Show All Notes</a></a></li>
+                            </ul>
+                        </li>
+
                     </ul>
                     <div class="header-actions-container">
                         <!-- Header actions start -->
@@ -173,6 +184,151 @@
                 </div>
             </div>
         </nav>
+    @elseif (Auth::user()->user_type == 'qa')
+        <nav class="navbar navbar-expand-lg navbar-light webnav-bar mb-3">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{ route('qa/dashboard') }}" id="homeLink">Dashboard</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="{{ route('definetopic') }}" id="feedbackLink"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Carrier Mgmt
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="feedbackLink">
+                                <li><a class="dropdown-item" href="{{ route('showcarrieradmin') }}">Show All Carriers</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="{{ route('createload') }}" id="feedbackLink"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Load Mgmt
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="feedbackLink">
+                                <li><a class="dropdown-item" href="{{ route('showloadadmin') }}">Show All Loads</a></a></li>
+                            </ul>
+                        </li>
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="{{ route('timetracker') }}" id="assessmentsLink"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Time Mgmt
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="assessmentsLink">
+                                <li><a class="dropdown-item" href="{{ route('timetracker') }}">Enter Time</a></li>
+                                <li><a class="dropdown-item" href="{{ route('showhistory') }}">Show History</a></li>
+                                <li><a class="dropdown-item" href="{{ route('createdailyupdate') }}">Enter Update</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="{{ route('timetracker') }}" id="assessmentsLink"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Admin Controls
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="assessmentsLink">
+                                <li><a class="dropdown-item" href="{{ route('showallusertimehistory') }}">Show All User's
+                                        Time History</a></li>
+                                <li><a class="dropdown-item" href="{{ route('updatesforallsales') }}">Show All Sale's
+                                        Users Updates</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="{{ route('file.index') }}" id="rubricsLink"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Resources
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="assessmentsLink">
+                                <li><a class="dropdown-item" href="{{ route('file.index') }}">Add Resources</a></li>
+                                <li><a class="dropdown-item" href="{{ route('showallfiles') }}">All Resources</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="{{ route('createload') }}" id="feedbackLink"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                User Mgmt
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="feedbackLink">
+                                <li><a class="dropdown-item" href="{{ route('showallusers') }}">Show All Users</a></a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="{{ route('createload') }}" id="feedbackLink"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Notes Mgmt
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="feedbackLink">
+                                <li><a class="dropdown-item" href="{{ route('showallnotes') }}">Show All Notes</a></a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <div class="header-actions-container">
+                        <!-- Header actions start -->
+                        <ul class="header-actions">
+                            <!-- Your existing header actions -->
+                        </ul>
+                        <!-- Header actions end -->
+                    </div>
+                    <div class="header-actions-container">
+                        <!-- Header actions start -->
+                        <ul class="header-actions">
+                            <li class="dropdown">
+                                <a href="#" id="userSettings" class="user-settings" data-toggle="dropdown"
+                                    aria-haspopup="true">
+                                    <span class="user-name d-none d-md-block text-white">@auth
+                                            {{ Auth::user()->name }}
+                                        @endauth
+                                    </span>
+                                    <span class="avatar">
+                                        <img src="{{ asset('assets/img') }}/user.png" alt="User Avatar">
+                                        <span class="status online"></span>
+                                    </span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userSettings">
+                                    <div class="header-profile-actions">
+                                        <a href="{{ route('updatepassword') }}">Update Password</a>
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="d-none">
+                                            @csrf
+                                        </form>
+
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userSettings">
+                                    <div class="header-profile-actions">
+                                        <a href="login.html">Logout</a>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                        <!-- Header actions end -->
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+    
     @elseif(Auth::user()->user_type == 'sales')
         <nav class="navbar navbar-expand-lg navbar-light webnav-bar mb-3">
             <div class="container-fluid">
@@ -184,7 +340,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('home') }}"
+                            <a class="nav-link" aria-current="page" href="{{ route('sales/dashboard') }}"
                                 id="homeLink">Dashboard</a>
                         </li>
                         <li class="nav-item dropdown">
@@ -288,7 +444,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('home') }}"
+                            <a class="nav-link" aria-current="page" href="{{ route('dispatch/dashboard') }}"
                                 id="homeLink">Dashboard</a>
                         </li>
 
