@@ -91,14 +91,25 @@
 
                                     <td><input type="text" id="date" name="date" placeholder="YYYY-MM-DD"
                                             value="{{ now()->format('Y-m-d') }}"></td>
-                                    <td><input type="time" id="punchInTime" name="punchInTime"
+                                    {{-- <td><input type="time" id="punchInTime" name="punchInTime"
                                             value="{{ $entry->punch_in_time }}" min="16:00" max="04:00"></td>
                                     <td><input type="time" id="breakInTime" name="breakInTime"
                                             value="{{ $entry->break_in_time }}" min="16:00" max="04:00"></td>
                                     <td><input type="time" id="breakOutTime" name="breakOutTime"
                                             value="{{ $entry->break_out_time }}" min="16:00" max="04:00"></td>
                                     <td><input type="time" id="punchOutTime" name="punchOutTime"
-                                            value="{{ $entry->punch_out_time }}" min="16:00" max="04:00"></td>
+                                            value="{{ $entry->punch_out_time }}" min="16:00" max="04:00"></td> --}}
+
+
+                                            <td><input type="time" id="punchInTime" name="punchInTime"
+                                                value="{{ date('H:i', strtotime($entry->punch_in_time)) }}" min="16:00" max="04:00"></td>
+                                     <td><input type="time" id="breakInTime" name="breakInTime"
+                                                value="{{ date('H:i', strtotime($entry->break_in_time)) }}" min="16:00" max="04:00"></td>
+                                     <td><input type="time" id="breakOutTime" name="breakOutTime"
+                                                value="{{ date('H:i', strtotime($entry->break_out_time)) }}" min="16:00" max="04:00"></td>
+                                     <td><input type="time" id="punchOutTime" name="punchOutTime"
+                                                value="{{ date('H:i', strtotime($entry->punch_out_time)) }}" min="16:00" max="04:00"></td>
+                                     
 
                                     {{-- <td><input type="time" id="punchInTime" name="punchInTime"
                                             value="{{ $entry->punch_in_time }}"></td>
