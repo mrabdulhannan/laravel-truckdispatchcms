@@ -151,32 +151,20 @@
                                         rows="5">{{ $carrier->preferredStates }}</textarea>
                                 </div>
 
-                                <!-- Upload Documents Section -->
-                                <div class="mb-3">
-                                    <label><strong>Upload Your Documents :</strong></label> <br>
-                                    <ul type="none" class="ullist">
-                                        <li>
-                                            <label for="mcAuthorityLetter">MC Authority Letter</label><br>
-                                            <input type="file" id="mcAuthorityLetter" name="mcAuthorityLetter">
-                                        </li>
+                            <label class="label" for="mcAuthorityLetter">MC Authority Letter</label>
+                            <input type="text" class="inputfull" id="mcAuthorityLetter" name="mcAuthorityLetter" value="{{ $carrier->mc_authority_letter }}"
+                                required>
 
-                                        <li>
-                                            <label for="certificateOfLiability">Certificate of Liability Insurance</label><br>
-                                            <input type="file" id="certificateOfLiability" name="certificateOfLiability">
-                                        </li>
-                                    </ul>
-                                    <ul type="none" class="ullist">
-                                        <li>
-                                            <label for="w9Form">W9 Form</label><br>
-                                            <input type="file" id="w9Form" name="w9Form">
-                                        </li>
+                            <label class="label" for="certificateOfLiabilityInsurance">Certificate of Liability
+                                Insurance</label>
+                            <input type="text" class="inputfull" id="certificateOfLiabilityInsurance"
+                                name="certificateOfLiabilityInsurance" value="{{ $carrier->certificate_of_liability_insurance }}"required>
 
-                                        <li>
-                                            <label for="voidCheque">Void Cheque (For QuickPay)</label><br>
-                                            <input type="file" id="voidCheque" name="voidCheque">
-                                        </li>
-                                    </ul>
-                                </div>
+                            <label class="label" for="w9Form">W9 Form</label>
+                            <input type="text" class="inputfull" id="w9Form" name="w9Form" value="{{ $carrier->w9_form }}"required>
+
+                            <label class="label" for="voidCheque">Void Cheque (For QuickPay)</label>
+                            <input type="text" class="inputfull" id="voidCheque" name="voidCheque" value="{{ $carrier->void_cheque }}" required>
 
                                 <!-- Submit Button -->
                                 <button type="submit" class="btn btn-primary">Update</button>

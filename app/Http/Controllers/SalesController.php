@@ -46,6 +46,10 @@ class SalesController extends Controller
             'PaymentMethod' => $request['PaymentMethod'],
             'Route' => $request['Route'],
             'preferredStates' => $request['preferredStates'],
+            'mc_authority_letter' => $request['mcAuthorityLetter'],
+            'certificate_of_liability_insurance' => $request['certificateOfLiabilityInsurance'],
+            'w9_form' => $request['w9Form'],
+            'void_cheque' => $request['voidCheque'],
 
             // Map other form fields accordingly
         ]);
@@ -68,6 +72,7 @@ class SalesController extends Controller
 
     public function updateCarrier(Request $request, $carrierId)
     {
+        // dd($request->all());
         // Validate the incoming request data as needed
         $request->validate([
             'companyName' => 'required|string',
@@ -87,10 +92,10 @@ class SalesController extends Controller
             'PaymentMethod' => 'required|string',
             'Route' => 'required|string',
             'preferredStates' => 'nullable|string',
-            'mcAuthorityLetter' => 'nullable|mimes:pdf,doc,docx',
-            'certificateOfLiability' => 'nullable|mimes:pdf,doc,docx',
-            'w9Form' => 'nullable|mimes:pdf,doc,docx',
-            'voidCheque' => 'nullable|mimes:pdf,doc,docx',
+            'mcAuthorityLetter' => 'nullable|string',
+            'certificateOfLiability' => 'nullable|string',
+            'w9Form' => 'nullable|string',
+            'voidCheque' => 'nullable|string',
         ]);
 
         // Find the carrier by ID
@@ -115,24 +120,12 @@ class SalesController extends Controller
         $carrier->PaymentMethod = $request->input('PaymentMethod');
         $carrier->Route = $request->input('Route');
         $carrier->preferredStates = $request->input('preferredStates');
+        $carrier->mc_authority_letter = $request->input('mcAuthorityLetter');
+        $carrier->certificate_of_liability_insurance = $request->input('certificateOfLiabilityInsurance');
+        $carrier->w9_form = $request->input('w9Form');
+        $carrier->void_cheque = $request->input('voidCheque');
 
-        // Update or handle file uploads
-        if ($request->hasFile('mcAuthorityLetter')) {
-            $carrier->mcAuthorityLetter = $request->file('mcAuthorityLetter')->store('uploads');
-        }
-
-        if ($request->hasFile('certificateOfLiability')) {
-            $carrier->certificateOfLiability = $request->file('certificateOfLiability')->store('uploads');
-        }
-
-        if ($request->hasFile('w9Form')) {
-            $carrier->w9Form = $request->file('w9Form')->store('uploads');
-        }
-
-        if ($request->hasFile('voidCheque')) {
-            $carrier->voidCheque = $request->file('voidCheque')->store('uploads');
-        }
-
+        // dd($carrier);
         $carrier->save();
 
         // Redirect back or to a specific route after updating
@@ -164,6 +157,7 @@ class SalesController extends Controller
         $updates = $request['updates'];
 
         $entry = auth()->user()->salesdailyupdate()->where('date', $date)->firstOrNew();
+        
         $user = auth()->user();
         if (!$entry->exists) {
             $user->salesdailyupdate()->create([
