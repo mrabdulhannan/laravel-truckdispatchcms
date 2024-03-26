@@ -40,7 +40,7 @@ class TimeTrackerController extends Controller
                 "break_out_time" => $breakOutTime,
                 "punch_out_time" => $punchOutTime,
                 "login_time" => $loginTime,
-                "logout_time" =>  $logoutTime,
+                "logout_time" =>  $punchOutTime,
             ]);
         }
         else{
@@ -50,7 +50,7 @@ class TimeTrackerController extends Controller
                 "break_out_time" => $breakOutTime,
                 "punch_out_time" => $punchOutTime,
                 "login_time" => $loginTime,
-                "logout_time" =>  $logoutTime,
+                "logout_time" =>  $punchOutTime,
             ]);
         }
         return redirect()->route('timetracker')->with('success', 'Time Updated successfully');
