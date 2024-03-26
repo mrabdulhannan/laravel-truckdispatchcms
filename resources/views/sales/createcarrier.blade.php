@@ -157,9 +157,29 @@
                                 <input type="radio" id="local" name="Route" value="Local">
                                 <label for="local">Local</label><br>
 
-                                <label><strong>What States Do You Prefer to Drive (Only for OTR)
-                                        (Optional):</strong></label> <br>
-                                <div class="container">
+                                <div class="mb-3">
+                                    <label><strong>What States Do You Prefer to Drive (Only for OTR)
+                                            (Optional):</strong></label> <br>
+                                    <textarea class="form-control" id="preferredStates" name="preferredStates"
+                                        rows="5"></textarea>
+                                </div>
+
+                                <label class="label" for="mcAuthorityLetter">MC Authority Letter</label>
+                                <input type="text" class="inputfull" id="mcAuthorityLetter" name="mcAuthorityLetter"
+                                    required>
+
+                                <label class="label" for="certificateOfLiabilityInsurance">Certificate of Liability
+                                    Insurance</label>
+                                <input type="text" class="inputfull" id="certificateOfLiabilityInsurance"
+                                    name="certificateOfLiabilityInsurance" required>
+
+                                <label class="label" for="w9Form">W9 Form</label>
+                                <input type="text" class="inputfull" id="w9Form" name="w9Form" required>
+
+                                <label class="label" for="voidCheque">Void Cheque (For QuickPay)</label>
+                                <input type="text" class="inputfull" id="voidCheque" name="voidCheque" required>
+
+                                {{-- <div class="container">
                                     <textarea class="form-control" id="my text" rows="5"></textarea>
 
 
@@ -184,7 +204,8 @@
                                     </ul>
 
 
-                                </div>
+                                </div> --}}
+
                                 <input type="submit" value="Submit" class="inputfull">
 
                             </form>
