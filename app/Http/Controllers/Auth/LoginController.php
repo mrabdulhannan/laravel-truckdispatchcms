@@ -67,8 +67,10 @@ class LoginController extends Controller
     public function addPunchinTime()
     {
         $user = auth()->user();
-        $currentDate = date('Y-m-d');
-        $currentTime = now(); // This gives you the current date and time as a Carbon instance
+        // $currentDate = date('Y-m-d');
+        // $currentTime = now(); // This gives you the current date and time as a Carbon instance
+        $currentDate = now()->setTimezone('Asia/Karachi')->toDateString(); // Adjusting the time zone to PKT and getting the date
+        $currentTime = now()->setTimezone('Asia/Karachi'); 
 
         // If you just want the time as a string, you can format it
         $formattedTime = $currentTime->format('H:i:s');
