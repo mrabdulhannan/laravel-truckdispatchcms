@@ -89,9 +89,9 @@
                                 Admin Controls
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="assessmentsLink">
-                                <li><a class="dropdown-item" href="{{ route('showallusertimehistory') }}">Show All User's
+                                <li><a class="dropdown-item" href="{{ route('showallusertimehistory') }}">All User's
                                         Time History</a></li>
-                                <li><a class="dropdown-item" href="{{ route('updatesforallsales') }}">Show All Sale's
+                                <li><a class="dropdown-item" href="{{ route('updatesforallsales') }}">All Sales
                                         Users Updates</a></li>
                                 
                             </ul>
@@ -113,7 +113,7 @@
                                 User Mgmt
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="feedbackLink">
-                                <li><a class="dropdown-item" href="{{ route('createload') }}">Create User</a></li>
+                                <li><a class="dropdown-item" href="{{ route('createuser') }}">Create User</a></li>
                                 <li><a class="dropdown-item" href="{{ route('showallusers') }}">Show All Users</a></a></li>
                             </ul>
                         </li>
