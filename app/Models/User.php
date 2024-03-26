@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\TimeTracker;
+use App\Models\Carrier;
+use App\Models\Load;
+use App\Models\Notes;
+use App\Models\Resource;
+use App\Models\SalesDailyUpdate;
 
 class User extends Authenticatable
 {
